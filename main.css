@@ -249,7 +249,7 @@ nav {
 }
 
 .main-message h3 {
-  font-size: 4rem;
+  font-size: 3rem;
   margin: 1rem 0;
   color: rgba(249, 105, 14, 1);
   background: linear-gradient(
@@ -489,7 +489,6 @@ hr {
 }
 
 .contact .container {
-  min-height: 50vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
