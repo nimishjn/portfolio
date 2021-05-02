@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="msapplication-TileColor" content="#151518" />
+  <meta name="theme-color" content="#151518" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.9/fullpage.min.css"
+    integrity="sha512-8M8By+q+SldLyFJbybaHoAPD6g07xyOcscIOQEypDzBS+sTde5d6mlK2ANIZPnSyxZUqJfCNuaIvjBUi8/RS0w=="
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.9/fullpage.min.js"
+    integrity="sha512-Gx/C4x1qubng2MWpJIxTPuWch9O88dhFFfpIl3WlqH0jPHtCiNdYsmJBFX0q5gIzFHmwkPzzYTlZC/Q7zgbwCw=="
+    crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Nimish Jain</title>
+</head>
+
+<body>
+  <div id="fullpage">
+    <div class="section section-home" id="home-pg" data-anchor="home">
+      <h1>Hi, I am Nimish.</h1>
+      <h3>You know the drill, just keep scrolling...</h3>
+    </div>
+
+    <!-- About section -->
+    <div class="section section-about" id="about-pg" data-anchor="about">
+        <div class="description">
+            <p>This is Nimish Jain. I am currently a fresher studying 
+                Information Technology at Vellore Institute of Technology, 
+                Vellore. I am currently exploring front-end web development 
+                using react.js and back-end web development using node.js. 
+                I also did a bit of app development using the flutter 
+                framework. I know a few programming languages like C, C++, 
+                Java and Python, along with HTML, CSS and Javascript. I am 
+                also a data analytics researcher in the data preprocessing 
+                domain. I have a conference publication under IEEE 
+                Organization.</p>
+            <p><a href="#contact-pg">Contact me</a> to know more about me!</p>
+        </div>
+    </div>
+
+    <!-- Skills section -->
+    <div class="section section-skills" id="skills-pg" data-anchor="skills">
+      <h1>Frameworks: </h1>
+      
+    </div>
+
+    <!-- Projects section -->
+    <div class="section section-projects" id="projects-pg" data-anchor="projects">
+      
+    </div>
+
+    <!-- Research section -->
+    <div class="section section-research" id="research-pg" data-anchor="research">
+      
+    </div>
+
+    <!-- Contact section -->
+    <div class="section section-contact" id="contact-pg" data-anchor="contact">
+      
+    </div>
+
+  <script>
+    new fullpage("#fullpage", {
+      //options here
+      autoScrolling: true,
+      scrollHorizontally: true,
+      animateAnchor:true,
+      anchors: ["home", "about", "skills", "projects", "research", "contact",],
+    });
+  </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Add smooth scrolling to all links
+      $("a").on("click", function (event) {
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+          // Prevent default anchor click behavior
+          event.preventDefault();
+
+          // Store hash
+          var hash = this.hash;
+
+          // Using jQuery's animate() method to add smooth page scroll
+          // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+          $("html, body").animate(
+            {
+              scrollTop: $(hash).offset().top,
+            },
+            800
+          );
+        } // End if
+      });
+    });
+  </script>
+</body>
+
+</html>
