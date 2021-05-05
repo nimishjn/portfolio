@@ -306,6 +306,8 @@ body {
 .section-contact h1 {
   color: white;
   font-size: 4rem;
+  font-weight: normal;
+  margin-bottom: 10px;
 }
 
 .contact-items a {
@@ -329,6 +331,7 @@ body {
 }
 
 .contact-fork {
+  margin-top: 10px;;
   color: white;
   font-size: 3rem;
   margin-bottom: 20px;
@@ -340,6 +343,12 @@ body {
 
 .contact-fork a:hover {
   opacity: 0.7;
+}
+
+@media screen and (max-width: 4000px) {
+  html {
+    font-size: 62.5%;
+  }
 }
 
 @media screen and (max-width: 1200px) {
