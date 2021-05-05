@@ -23,7 +23,7 @@
 
 <body>
   <div id="fullpage">
-    <div class="section section-home" id="home-pg" data-anchor="home">
+    <div class="section section-home" id="home-pg">
       <h1>Hi, I am Nimish.</h1>
       <h3>You know the drill, just keep scrolling...</h3>
     </div>
@@ -46,7 +46,7 @@
     </div>
 
     <!-- Skills section -->
-    <div class="section section-skills" id="skills-pg" data-anchor="skills">
+    <div class="section section-skills" id="skills-pg">
       <h2>Frameworks:</h2>
       <div class="skills-column">
         <div class="skills-row">
@@ -103,9 +103,9 @@
     </div>
 
     <!-- Projects section -->
-    <div class="section section-projects" id="projects-pg" data-anchor="projects">
+    <div class="section section-projects" id="projects-pg">
       <h1>No projects done yet</h1>
-       <div class="projects-column">
+      <!-- <div class="projects-column">
         <div class="projects-row">
           <div class="projects-card">
             <img src="./assets/c.png" alt="matlab logo">
@@ -148,12 +148,12 @@
             <p>Matlab</p>
           </div>
         </div>
-      </div> 
+      </div>  -->
     </div>
 
     <!-- Research section -->
     <div class="section section-research" id="research-pg" data-anchor="research">
-      <h1>Check out my research accounts</h1>
+      <h1>Check out my research accounts: </h1>
       <div class="research-acc-column">
         <div class="research-acc-row">
           <div class="research-acc-card">
@@ -176,19 +176,36 @@
           </div>
         </div>
       </div>
+      <div class="first-paper">
+        <a href="https://ieeexplore.ieee.org/document/9404497" target="_blank">Link to my first research paper</a>
+      </div>
     </div>
 
     <!-- Contact section -->
-    <div class="section section-contact" id="contact-pg" data-anchor="contact">
-      
+    <div class="section section-contact fp-auto-height" id="contact-pg">
+      <h1>Get to know more about me...</h1>
+      <div class="contact-items">
+        <a href="https://www.github.com/nimishjn" target="_blank" class="fa fa-github"></a>
+        <a href="https://www.facebook.com/nimishjain100701" target="_blank" class="fa fa-facebook"></a>
+        <a href="https://www.twitter.com/nimishjain_" target="_blank" class="fa fa-twitter"></a>
+        <a href="https://www.instagram.com/nimishjain_" target="_blank" class="fa fa-instagram"></a>
+        <a href="mailto:nimishjain100701@gmail.com" target="_blank" class="fa fa-envelope"></a>
+        <a href="tel:+9304917126" class="fa fa-phone"></a>
+      </div>
+      <div class="contact-fork">
+          <hr>
+          <p><a href="https://github.com/nimishjn/portfolio" target="_blank">Fork</a> this website</p>
+      </div>
     </div>
-
+  </div>
   <script>
     new fullpage("#fullpage", {
       //options here
       autoScrolling: true,
       scrollHorizontally: true,
       animateAnchor:true,
+      navigation: true,
+      navigationPosition: 'right',
       anchors: ["home", "about", "skills", "projects", "research", "contact",],
     });
   </script>
