@@ -88,18 +88,30 @@ body {
 .section-skills h2 {
   text-align: center;
   font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.skills-column {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .skills-row {
-  width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .skills-card {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 10rem;
+  height: 14rem;
   margin: 1rem;
 }
 
@@ -112,6 +124,113 @@ body {
   padding: 0;
   text-align: center;
   font-size: 2rem;
+  width: 100%;
+  
+}
+
+/* Project section */
+
+.section-projects {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.section-projects h1 {
+  width: 100%;
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.projects-column {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.projects-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.projects-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20rem;
+  height: 25rem;
+  margin: 1rem;
+  padding: 2rem;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.projects-card img {
+  width: 100%;
+}
+
+.projects-card p {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+/* Research section */
+
+.section-research {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.section-research h1 {
+  width: 100%;
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.research-acc-column {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.research-acc-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.research-acc-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20rem;
+  height: 25rem;
+  margin: 1rem;
+  padding: 2rem;
+}
+
+.research-acc-card img {
+  width: 100%;
+}
+
+.research-acc-card p {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 2.5rem;
 }
 
 @media screen and (max-width: 1200px) {
@@ -136,5 +255,10 @@ body {
     html {
       font-size: 28%;
     }
+
+    .section-about p {
+      font-size: 4rem;
+    }
+
   }
   
