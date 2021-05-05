@@ -30,8 +30,40 @@ body {
     height: 100%;
 }
 
-#fp-nav {
-  color: white;
+#fp-nav ul li a span, .fp-slidesNav ul li a span{ 
+  background: rgba(201, 201, 201, 0.5); 
+}
+
+/* Navbar */
+
+#menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: transparent;
+  align-items: center;
+  z-index: 1;
+  position: absolute;
+  left: 0;
+}
+
+#menu li {
+  float: left;
+}
+
+#menu li a {
+  font-size: 3rem;
+  display: block;
+  color: whitesmoke;
+  text-align: center;
+  padding: 0.1rem 1rem;
+  margin: 1rem;
+  text-decoration: none;
+}
+
+#menu li a:hover {
+  opacity: 0.7;
 }
 
 /* Home section */
@@ -291,14 +323,6 @@ body {
   bottom: 0;
 }
 
-.copyright hr {
-  background-color: pink;
-  height: 1px;
-  border: 0;
-  width: 100%;
-  margin-top: 50px;
-}
-
 .copyright p {
   color: white;
   font-size: 2rem;
@@ -307,6 +331,7 @@ body {
 .contact-fork {
   color: white;
   font-size: 3rem;
+  margin-bottom: 20px;
 }
 
 .contact-fork a {

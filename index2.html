@@ -6,30 +6,33 @@
   <meta name="msapplication-TileColor" content="#151518" />
   <meta name="theme-color" content="#151518" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.9/fullpage.min.css"
-    integrity="sha512-8M8By+q+SldLyFJbybaHoAPD6g07xyOcscIOQEypDzBS+sTde5d6mlK2ANIZPnSyxZUqJfCNuaIvjBUi8/RS0w=="
-    crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.9/fullpage.min.js"
-    integrity="sha512-Gx/C4x1qubng2MWpJIxTPuWch9O88dhFFfpIl3WlqH0jPHtCiNdYsmJBFX0q5gIzFHmwkPzzYTlZC/Q7zgbwCw=="
-    crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.min.js" 
+  integrity="sha512-HqbDsHIJoZ36Csd7NMupWFxC7e7aX2qm213sX+hirN+yEx/eUNlZrTWPs1dUQDEW4fMVkerv1PfMohR1WdFFJQ==" 
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.0/fullpage.css" 
+  integrity="sha512-hGBKkjAVJUXoImyDezOKpzuY4LS1eTvJ4HTC/pbxn47x5zNzGA1vi3vFQhhOehWLTNHdn+2Yqh/IRNPw/8JF/A==" 
+  crossorigin="anonymous" />
   <link rel="stylesheet" href="styles.css" />
   <title>Nimish Jain</title>
 </head>
 
 <body>
+  <ul id="menu">
+    <li data-menuanchor="Home"><a href="#home">Home</a></li>
+    <li data-menuanchor="About"><a href="#about">About</a></li>
+    <li data-menuanchor="Skills"><a href="#skills">Skills</a></li>
+    <li data-menuanchor="Projects"><a href="#projects">Projects</a></li>
+    <li data-menuanchor="Research"><a href="#research">Research</a></li>
+    <li data-menuanchor="Contact"><a href="#contact">Contact</a></li>
+  </ul>
   <div id="fullpage">
-    <div class="section section-home" id="home-pg">
+    <div class="section section-home" data-anchor="home">
       <h1>Hi, I am Nimish.</h1>
       <h3>You know the drill, just keep scrolling...</h3>
     </div>
 
     <!-- About section -->
-    <div class="section section-about" id="about-pg" data-anchor="about">
+    <div class="section section-about" data-anchor="about">
         <div class="description">
             <p>This is Nimish Jain. I am currently a fresher studying 
                 Information Technology at Vellore Institute of Technology, 
@@ -41,12 +44,12 @@
                 also a data analytics researcher in the data preprocessing 
                 domain. I have a conference publication under IEEE 
                 Organization.</p>
-            <p><a href="#contact-pg">Contact me</a> to know more about me!</p>
+            <p><a href="#contact">Contact me</a> to know more about me!</p>
         </div>
     </div>
 
     <!-- Skills section -->
-    <div class="section section-skills" id="skills-pg">
+    <div class="section section-skills" data-anchor="skills">
       <h2>Frameworks:</h2>
       <div class="skills-column">
         <div class="skills-row">
@@ -103,7 +106,7 @@
     </div>
 
     <!-- Projects section -->
-    <div class="section section-projects" id="projects-pg">
+    <div class="section section-projects" data-anchor="projects">
       <h1>No projects done yet</h1>
       <!-- <div class="projects-column">
         <div class="projects-row">
@@ -152,24 +155,24 @@
     </div>
 
     <!-- Research section -->
-    <div class="section section-research" id="research-pg" data-anchor="research">
+    <div class="section section-research" data-anchor="research">
       <h1>Check out my research accounts: </h1>
       <div class="research-acc-column">
         <div class="research-acc-row">
           <div class="research-acc-card">
-            <a href="https://scholar.google.com/citations?user=oKBKRQ0AAAAJ&hl=en" alt="Research Gate" target="_blank">
+            <a href="https://scholar.google.com/citations?user=oKBKRQ0AAAAJ&hl=en" target="_blank">
               <img src="./assets/googlescholar.png" alt="Google scholar">
             </a>
             <p>Google scholar</p>
           </div>
           <div class="research-acc-card">
-            <a href="https://www.researchgate.net/profile/Nimish-Jain-4" alt="Research Gate" target="_blank">
+            <a href="https://www.researchgate.net/profile/Nimish-Jain-4" target="_blank">
               <img src="./assets/researchgate.png" alt="Researchgate">
             </a>
             <p>Researchgate</p>
           </div>
           <div class="research-acc-card">
-            <a href="https://publons.com/researcher/4167049/nimish-jain/" alt="Research Gate" target="_blank">
+            <a href="https://publons.com/researcher/4167049/nimish-jain/" target="_blank">
               <img src="./assets/publons.png" alt="Publons">
             </a>
             <p>Publons</p>
@@ -182,7 +185,7 @@
     </div>
 
     <!-- Contact section -->
-    <div class="section section-contact fp-auto-height" id="contact-pg">
+    <div class="section section-contact fp-auto-height" data-anchor="contact">
       <h1>Get to know more about me...</h1>
       <div class="contact-items">
         <a href="https://www.github.com/nimishjn" target="_blank" class="fa fa-github"></a>
@@ -193,7 +196,6 @@
         <a href="tel:+9304917126" class="fa fa-phone"></a>
       </div>
       <div class="contact-fork">
-          <hr>
           <p><a href="https://github.com/nimishjn/portfolio" target="_blank">Fork</a> this website</p>
       </div>
     </div>
@@ -202,37 +204,16 @@
     new fullpage("#fullpage", {
       //options here
       autoScrolling: true,
+      anchors: ["home", "about", "skills", "projects", "research", "contact",],
       scrollHorizontally: true,
       animateAnchor:true,
       navigation: true,
       navigationPosition: 'right',
-      anchors: ["home", "about", "skills", "projects", "research", "contact",],
-    });
-  </script>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      // Add smooth scrolling to all links
-      $("a").on("click", function (event) {
-        // Make sure this.hash has a value before overriding default behavior
-        if (this.hash !== "") {
-          // Prevent default anchor click behavior
-          event.preventDefault();
-
-          // Store hash
-          var hash = this.hash;
-
-          // Using jQuery's animate() method to add smooth page scroll
-          // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-          $("html, body").animate(
-            {
-              scrollTop: $(hash).offset().top,
-            },
-            800
-          );
-        } // End if
-      });
+      navigationTooltips: ["Home", "About", "Skills", "Projects", "Research", "Contact",],
+      showActiveTooltip: false,
+      menu: '#menu',
+      autoScrolling: true,
+      slidesNavigation: true
     });
   </script>
 </body>
