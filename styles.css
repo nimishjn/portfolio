@@ -334,6 +334,10 @@ body {
   margin-bottom: 20px;
 }
 
+.contact-fork p {
+  margin-top: 10px;
+}
+
 .contact-fork a {
   color: bisque;
 }
