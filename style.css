@@ -281,6 +281,26 @@ body {
     width: 100%;
 }
 
+/* Projects Section */
+
+.projects-container {
+    min-height: 100vh;
+    background-color: rgb(14, 14, 14);
+}
+
+/* Research Section */
+
+.research-container {
+    min-height: 100vh;
+}
+
+/* Contact Section */
+
+.contact-container {
+    min-height: 100vh;
+    background-color: rgb(14, 14, 14);
+}
+
 @media screen and (max-width: 1000px) {
     .home-container img {
         display: none;
