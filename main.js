@@ -24,8 +24,8 @@ function loadSkillsPage() {
         var element = document.createElement('div');
         element.classList.add('skill-card');
         element.innerHTML = `
-            <p>${skills[i].name}</p>
             <img src="${skills[i].image}" alt="${skills[i].name}">
+            <p>${skills[i].name}</p>
         `;
         allSkills.appendChild(element);
     }

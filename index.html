@@ -30,7 +30,7 @@
     </div>
 
     <!-- Home -->
-    <div class="home-container">
+    <div id="home" class="home-container">
         <div class="home-text">
             <h1>Hi, I’m Nimish</h1>
             <h2>An aspiring fullstack developer</h2>
@@ -42,16 +42,33 @@
                 <a href="https://www.hackerrank.com/nimishjain100701" target="_blank"><i class="fab fa-hackerrank"></i></a>
             </div>
             <div class="buttons">
-                <button active><i class="fas fa-comment-dots"></i> GET IN TOUCH</button>
-                <button active><i class="fas fa-arrow-alt-circle-down"></i> KNOW MORE</button>
+                <button onclick="window.location = '#contact';" active><i class="fas fa-comment-dots"></i> GET IN TOUCH</button>
+                <button onclick="window.location = '#about';" active><i class="fas fa-arrow-alt-circle-down"></i> KNOW MORE</button>
             </div>
         </div>
         <img src="./assets/hello.svg" alt="Hello">
     </div>
 
+    <!-- About -->
+    <div class="about-container" id="about">
+        <div class="about-image">
+            <img src="./assets/nimish.svg" alt="Nimish vector image">
+        </div>
+        <div class="about-main">
+            <h1>About</h1>
+            <p>Hey, this is Nimish Jain, second year undergrad at Vellore
+                Institute of Technology, Vellore pursuing B. Tech Information Technology.
+                I am currently learning react.js and will move to Node.js for backend.
+                I am a Data Analytics Researcher in Data Preprocessing domain.
+                I have also a conference publication in the IEEE organization.
+                 
+            </p>
+        </div>
+    </div>
+
     <!-- Skills -->
     <div id="skills" class="skills-container">
-        <img class="nimish-svg" src="./assets/nimish.svg" alt="Nimish vector art">
+        <img class="skills-svg" src="./assets/skills.svg" alt="Skills vector art">
         <div class="skills-main">
             <h1>Tools and skills</h1>
             <div id="all-skills">
