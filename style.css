@@ -1,6 +1,12 @@
 :root {
-    --dark-gray: #222;
+    --black1: black;
+    --black2: rgb(14, 14, 14);
+    --white1: white;
+    --white2: rgb(230, 230, 230);
     --blue: rgba(108, 99, 255, 1);
+    --background1: var(--black1);
+    --background2: var(--black2);
+    --text: var(--white1);
 }
 
 html {
@@ -20,10 +26,11 @@ a {
 
 body {
     min-height: 100vh;
-    background-color: black;
-    color: white;
+    background-color: var(--background1);
+    color: var(--text);
     display: flex;
     flex-direction: column;
+    transition: all 0.25s ease-in-out;
 }
 
 ::-webkit-scrollbar {
@@ -45,13 +52,29 @@ body {
     height: 40px;
     position: fixed;
     z-index: 5;
-    background-color: var(--dark-gray);
-    color: white;
+    background-color: rgba(34, 34, 34, 0.5);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
 }
 
-.navbar-container ul {
-    position: absolute;
-    top: 0;
+#dark-mode-switch {
+    display: block;
+    background-color: transparent;
+    border: none;
+    color: var(--text);
+    padding: 10px 20px;
+    transition: all 0.25s;
+}
+
+#dark-mode-switch:hover {
+    cursor: pointer;
+}
+
+.desktop-navbar {
     width: 100%;
     height: 100%;
     list-style-type: none;
@@ -61,22 +84,28 @@ body {
     justify-content: flex-end;
 }
 
+.mobile-navbar, #hamburger {
+    display: none;
+}
+
 .nav-title {
     position: absolute;
     left: 0;
-    padding: 10px 15px;
     font-size: 20px;
+    padding: 0px 15px;
 }
 
-.navbar-container li {
+.desktop-navbar li {
     padding: 10px;
     font-size: 16px;
     transition: all 0.25s ease-in-out;
 }
 
-.navbar-container li:hover {
+.desktop-navbar li:hover {
     background-color: var(--blue);
 }
+
+/* Home Section */
 
 .home-container {
     display: flex;
@@ -87,7 +116,7 @@ body {
 }
 
 .home-text {
-    color: white;
+    
 }
 
 .home-text h1 {
@@ -148,7 +177,7 @@ body {
 
 .buttons button:hover {
     cursor: pointer;
-    background-color: black;
+    background-color: var(--background1);
 }
 
 .home-container img {
@@ -159,7 +188,7 @@ body {
 
 .about-container {
     min-height: 100vh;
-    background-color: rgb(14, 14, 14);
+    background-color: var(--background2);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -223,7 +252,7 @@ body {
 
 .about-buttons button:hover {
     cursor: pointer;
-    background-color: black;
+    background-color: var(--background1);
 }
 
 /* Skills Section */
@@ -285,7 +314,7 @@ body {
 
 .projects-container {
     min-height: 100vh;
-    background-color: rgb(14, 14, 14);
+    background-color: var(--background2);
 }
 
 /* Research Section */
@@ -298,7 +327,7 @@ body {
 
 .contact-container {
     min-height: 100vh;
-    background-color: rgb(14, 14, 14);
+    background-color: var(--background2);
 }
 
 @media screen and (max-width: 1000px) {
@@ -308,6 +337,66 @@ body {
 
     .skills-main {
         width: 80%;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .navbar-container ul {
+        display: none;
+    }
+
+    #hamburger {
+        display: block;
+        background-color: transparent;
+        color: var(--text);
+        border: none;
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    #hamburger:hover {
+        cursor: pointer;
+    }
+
+    .mobile-navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: fixed;
+        list-style-type: none;
+        z-index: 5;
+        background-color: rgba(34, 34, 34, 0.5);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        right: -200px;
+        height: 100vh;
+        width: 200px;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .mobile-navbar button {
+        margin: 10px;
+        font-size: 20px;
+        background-color: transparent;
+        color: var(--text);
+        border: none;
+    }
+    
+    .mobile-navbar button:hover {
+        cursor: pointer;
+    }
+
+    .mobile-navbar li {
+        
+        padding: 10px;
+        font-size: 16px;
+        transition: all 0.25s ease-in-out;
+        width: 100%;
+    }
+    
+    .mobile-navbar li:hover {
+        background-color: var(--blue);
     }
 }
 
@@ -380,3 +469,4 @@ body {
         margin-right: 10px;
     }
 }
+

@@ -38,3 +38,36 @@ function loadProjectsPage() {
 function loadResearchPage() {
 
 }
+
+function darkModeSwitch() {
+    var element = document.getElementById('dark-mode-switch');
+    setTimeout(function () {
+        element.style.opacity = 0;
+        setTimeout(function() {
+            if(element.name == 'dark') {
+                element.innerHTML = '<i class="fas fa-sun"></i>';
+                element.name = 'light';
+                document.documentElement.style.setProperty('--background1', 'var(--white1)');
+                document.documentElement.style.setProperty('--background2', 'var(--white2)');
+                document.documentElement.style.setProperty('--text', 'var(--black1)');
+            } else {
+                element.innerHTML = '<i class="fas fa-moon"></i>';
+                element.name = 'dark';
+                document.documentElement.style.setProperty('--background1', 'var(--black1)');
+                document.documentElement.style.setProperty('--background2', 'var(--black2)');
+                document.documentElement.style.setProperty('--text', 'var(--white1)');
+            }
+            element.style.opacity = 1;
+        }, 250);
+    });
+}
+
+function openNavbar() {
+    var nav = document.getElementById('mobile-navbar');
+    nav.style.transform = 'translateX(-200px)';
+}
+
+function closeNavbar() {
+    var nav = document.getElementById('mobile-navbar');
+    nav.style.transform = 'translateX(0px)';
+}

@@ -18,8 +18,8 @@
 <body>
     <!-- Navbar -->
     <div class="navbar-container">
-        <ul>
-            <a class="nav-title" href="#home">Nimish</a>
+        <a class="nav-title" href="#home">Nimish</a>
+        <ul class='desktop-navbar'>
             <li><a href="#home">HOME</a></li>
             <li><a href="#about">ABOUT</a></li>
             <li><a href="#skills">TOOLS AND SKILLS</a></li>
@@ -27,7 +27,18 @@
             <li><a href="#research">RESEARCH</a></li>
             <li><a href="#contact">CONTACT ME</a></li>
         </ul>
+        <button id="dark-mode-switch" onclick="darkModeSwitch()" class="dark-theme" name="dark" active><i class="fas fa-moon"></i></button>
+        <button id="hamburger" onclick="openNavbar()" active><i class="fas fa-bars"></i></button>
     </div>
+    <ul class='mobile-navbar' id="mobile-navbar">
+        <button onclick="closeNavbar()" active><i class="fas fa-times-circle"></i></button>
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#skills">TOOLS AND SKILLS</a></li>
+        <li><a href="#projects">PROJECTS</a></li>
+        <li><a href="#research">RESEARCH</a></li>
+        <li><a href="#contact">CONTACT ME</a></li>
+    </ul>
 
     <!-- Home -->
     <div id="home" class="home-container">
