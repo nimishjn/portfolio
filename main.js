@@ -57,7 +57,51 @@ function loadProjectsPage() {
 }
 
 function loadResearchPage() {
+    researchProfiles = [
+        {name: "ORCID iD", logo: "<i class='fab fa-orcid'></i>", link: "https://orcid.org/0000-0001-9607-0764"},
+        {name: "Google Scholar", logo: "<i class='fas fa-graduation-cap'></i>", link: "https://scholar.google.com/citations?user=oKBKRQ0AAAAJ&hl=en"},
+        {name: "ResearchGate", logo: "<i class='fab fa-researchgate'></i>", link: "https://www.researchgate.net/profile/Nimish-Jain-4"},
+        {name: "Publons", logo: "<i class='fas fa-file-powerpoint'></i>", link: "https://publons.com/researcher/4167049/nimish-jain/"},
+        {name: "SciProfiles", logo: "<i class='fas fa-graduation-cap'></i>", link: "https://sciprofiles.com/profile/1689275"},
+    ];
 
+    var allResearchProfiles = document.getElementById('all-research-profiles');
+
+    for(var i = 0; i < researchProfiles.length; i++) {
+        var element = document.createElement('a');
+        element.rel = "noreferrer noopener";
+        element.href = `${researchProfiles[i].link}`;
+        element.target = "_blank";
+        element.innerHTML = `
+            <div class="research-card">
+                ${researchProfiles[i].logo}
+                <p>${researchProfiles[i].name}</p>
+                <i class="fas fa-angle-right"></i>
+            </div>
+        `;
+        allResearchProfiles.appendChild(element);
+    }
+
+    researchPapers = [
+        {title: "Modeling of Predictable Variations in Multi-Time Instant Ambient Temperature Time Series", link: "https://ieeexplore.ieee.org/document/9404497", logo: "<i class='fas fa-file-alt'></i>"}
+    ];
+
+    var allResearchPapers = document.getElementById('all-research-papers');
+
+    for(var i = 0; i < researchPapers.length; i++) {
+        var element = document.createElement('a');
+        element.rel = "noreferrer noopener";
+        element.href = `${researchPapers[i].link}`;
+        element.target = "_blank";
+        element.innerHTML = `
+            <div class="research-card">
+                ${researchPapers[i].logo}
+                <p>${researchPapers[i].title}</p>
+                <i class="fas fa-angle-right"></i>
+            </div>
+        `;
+        allResearchPapers.appendChild(element);
+    }
 }
 
 function darkModeSwitch() {
