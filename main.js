@@ -32,7 +32,28 @@ function loadSkillsPage() {
 }
 
 function loadProjectsPage() {
+    projects = [{title: "Expense tracker", image: "./assets/expense.png", description:"Add your expenses along with description and date and get the total expense.", deploy:"https://nimishjn.github.io/ADG-WebDev-Task2/", repo:"https://github.com/nimishjn/ADG-WebDev-Task2/"},
+                {title: "Quiz using API", image: "./assets/quiz.png", description: "Takes the questions from an API and renders a 10 questions quiz.", deploy: "https://nimishjn.github.io/ADG-WebDev-Task3/", repo: "https://github.com/nimishjn/ADG-WebDev-Task3/"},
+                {title: "Links", image: "./assets/links.png", description: "Used to host all my skills and links on one website", deploy: "https://links.nimish-jain.com/", repo: "https://github.com/nimishjn/links/"},
+                {title: "Resume", image: "./assets/resume.png", description: "A person can visit this website to either view or download my resume.", deploy: "https://resume.nimish-jain.com/", repo: "https://github.com/nimishjn/resume/"},
+                {title: "Portfolio Website", image: "./assets/portfolio.png", description: "Portfolio website to display my skills, projects, research work, etc.", deploy: "https://www.nimish-jain.com/", repo: "https://github.com/nimishjn/portfolio/"}];
 
+    var allProjects = document.getElementById('all-projects');
+
+    for(var i = 0; i < projects.length; i++) {
+        var element = document.createElement('div');
+        element.classList.add('project-card');
+        element.innerHTML = `
+            <img src="${projects[i].image}" alt="${projects[i].title}">
+            <h2>${projects[i].title}</h2>
+            <p>${projects[i].description}</p>
+            <div class="project-buttons">
+                <a id="deploy-button" href="${projects[i].deploy}" target="_blank"><i class="fas fa-eye"></i> View</a>
+                <a href="${projects[i].repo}" id="code-button" target="_blank"><i class="fas fa-file-code"></i> Code</a>
+            </div>
+        `;
+        allProjects.appendChild(element);
+    }
 }
 
 function loadResearchPage() {
@@ -50,12 +71,14 @@ function darkModeSwitch() {
                 document.documentElement.style.setProperty('--background1', 'var(--white1)');
                 document.documentElement.style.setProperty('--background2', 'var(--white2)');
                 document.documentElement.style.setProperty('--text', 'var(--black1)');
+                document.documentElement.style.setProperty('--navbar', 'var(--navbar-light)');
             } else {
                 element.innerHTML = '<i class="fas fa-moon"></i>';
                 element.name = 'dark';
                 document.documentElement.style.setProperty('--background1', 'var(--black1)');
                 document.documentElement.style.setProperty('--background2', 'var(--black2)');
                 document.documentElement.style.setProperty('--text', 'var(--white1)');
+                document.documentElement.style.setProperty('--navbar', 'var(--navbar-dark)');
             }
             element.style.opacity = 1;
         }, 250);
