@@ -198,6 +198,32 @@ body {
     font-weight: 300;
     font-size: 20px;
     width: 90%;
+    margin-bottom: 15px;;
+}
+
+.about-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.about-buttons button {
+    font-size: 18px;
+    height: 50px;
+    width: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--blue);
+    border: 2px solid var(--blue);
+    transition: all 0.25s ease-in-out;
+    color: white;
+    margin-right: 20px;
+}
+
+.about-buttons button:hover {
+    cursor: pointer;
+    background-color: black;
 }
 
 /* Skills Section */
@@ -277,6 +303,14 @@ body {
     #all-skills {
         justify-content: center;
     }
+
+    .about-image {
+        display: none;
+    }
+
+    .about-main {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 400px) {
@@ -303,6 +337,19 @@ body {
     .buttons button {
         font-size: 10px;
         height: 30px;
+        width: 110px;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: var(--blue);
+        border: 2px solid var(--blue);
+        transition: all 0.25s ease-in-out;
+        color: white;
+        margin-right: 10px;
+    }
+
+    .about-buttons button {
+        font-size: 14px;
+        height: 40px;
         width: 110px;
         padding: 5px;
         border-radius: 5px;
