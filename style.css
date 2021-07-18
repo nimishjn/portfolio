@@ -15,6 +15,7 @@
 html {
     font-size: 62.5%;
     font-family: 'Roboto Slab', serif;
+    scroll-behavior: smooth;
 }
 
 * {
@@ -329,7 +330,7 @@ body {
     font-weight: 400;
     font-size: 30px;
     text-align: center;
-    margin: 15px;
+    margin: 50px 0px;
 }
 
 #all-projects {
@@ -350,6 +351,7 @@ body {
     margin: 10px;
     padding: 10px;
     transition: all 0.25s ease-in-out;
+    border-radius: 10px;
 }
 
 .project-card:hover {
