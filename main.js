@@ -138,3 +138,28 @@ function closeNavbar() {
     var nav = document.getElementById('mobile-navbar');
     nav.style.transform = 'translateX(0px)';
 }
+
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxhd-eQtInVaoQ_hWsLtgQSt7oEXjMMUkASrd2k-gObhuGQZx9STGuh_kX13yE9lLeVrA/exec';
+const form = document.forms['say-hi-form'];
+
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => notification('Your message has been received!'))
+      .catch(error => notification('Some error occured on form submit!'));
+    
+    form.reset();
+});
+
+async function notification(message) {
+    const element = document.createElement('div');
+    element.id = 'notification';
+    element.innerHTML = `
+    <h1>${message}</h1>
+    `;
+    document.querySelector('body').appendChild(element);
+    setTimeout(() => {
+        document.querySelector('body').removeChild(element);
+    }, 5000);
+}

@@ -507,8 +507,144 @@ body {
 /* Contact Section */
 
 .contact-container {
-    min-height: 100vh;
     background-color: var(--background2);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+.connect {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 40%;
+    margin: 50px 0px;
+}
+
+.connect h1 {
+    font-weight: 400;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.socials {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    justify-self: left;
+}
+
+.socials a {
+    font-size: 16px;
+    margin-bottom: 10px;
+    letter-spacing: 5%;
+    transition: all 0.25s ease-in-out;
+}
+
+.socials i {
+    font-size: 26px;
+    margin-right: 15px;
+}
+
+.socials a:hover {
+    color: var(--blue);
+}
+
+.say-hi {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 50%;
+    margin: 50px 0px;
+}
+
+.say-hi h1 {
+    font-weight: 400;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.say-hi form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 90%;
+}
+
+.say-hi input {
+    background-color: transparent;
+    border: 2px solid var(--text);
+    width: 90%;
+    height: 40px;
+    margin-bottom: 20px;
+    color: var(--text);
+    padding-left: 20px;
+    border-radius: 5px;
+    transition: all 0.25s ease-in-out;
+}
+
+.say-hi input:focus{
+    outline: none;
+    border-color: var(--blue);
+}
+
+.say-hi input::placeholder {
+    font-family: 'Roboto Slab', serif;
+    font-size: 16px;
+}
+
+.say-hi button {
+    width: 100px;
+    height: 40px;
+    padding: 5px;
+    text-align: center;
+    font-size: 16px;
+    border: 2px solid var(--blue);
+    border-radius: 10px;
+    background-color: var(--blue);
+    color: var(--white1);
+    margin: 5px;
+    transition: all 0.25s ease-in-out;
+}
+
+.say-hi button:hover {
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--text);
+}
+
+footer {
+    margin: 10px 0px;
+}
+
+footer h3{
+    font-weight: 400;
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+#notification {
+    position: fixed;
+    top: 50px;
+    right: 5px;
+    z-index: 10;
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    background: var(--navbar);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    transition: all linear 0.25s ease-in-out;
 }
 
 @media screen and (max-width: 1000px) {
@@ -608,6 +744,20 @@ body {
 
     .research-profiles, .research-papers {
         width: 100%;
+    }
+
+    .contact-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .connect {
+        width: 90%;
+    }
+
+    .say-hi {
+        width: 100%;
+        align-items: center;
     }
 }
 
