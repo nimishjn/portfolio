@@ -43,14 +43,17 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
+    background: rgba(107, 99, 255, 0.596);
+}
+
+::-webkit-scrollbar-thumb:hover {
     background: var(--blue);
-    border-radius: 5px;
 }
 
 .navbar-container {
     width: 100%;
     height: 60px;
-    position: fixed;
+    /* position: fixed; */
     z-index: 5;
     background: var(--navbar);
     -webkit-backdrop-filter: blur(10px);
@@ -111,6 +114,16 @@ body {
 
 .desktop-navbar li:hover {
     background-color: var(--blue);
+}
+
+/* .active {
+    text-decoration: underline;
+} */
+
+.main-container {
+    height: calc(100vh - 60px);
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
 /* Home Section */
@@ -236,7 +249,9 @@ body {
     font-weight: 300;
     font-size: 20px;
     width: 90%;
-    margin-bottom: 15px;;
+    margin-bottom: 15px;
+    margin-bottom: 30px;
+    text-align: justify;
 }
 
 .about-buttons {
@@ -628,6 +643,7 @@ body {
 
 footer {
     margin: 10px 0px;
+    position: relative;
 }
 
 footer h3{
@@ -753,6 +769,7 @@ footer h3{
 
     .research-profiles, .research-papers {
         width: 100%;
+        margin: 0px;
     }
 
     .contact-container {
