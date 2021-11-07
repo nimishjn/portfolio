@@ -17,7 +17,8 @@ function loadSkillsPage() {
     { name: "HTML", image: "./assets/HTML5.png" },
     { name: "CSS", image: "./assets/css3.png" },
     { name: "JavaScript", image: "./assets/javascript.png" },
-    { name: "React JS", image: "./assets/reactjs.png" },
+    { name: "ReactJs", image: "./assets/reactjs.png" },
+    { name: "AngularJs", image: "./assets/angularjs.svg" },
     { name: "Matlab", image: "./assets/matlab.png" },
     { name: "Git", image: "./assets/git.png" },
     { name: "GitHub", image: "./assets/github.png" },
@@ -167,6 +168,12 @@ function loadResearchPage() {
       title:
         "Modeling of Predictable Variations in Multi-Time Instant Ambient Temperature Time Series",
       link: "https://ieeexplore.ieee.org/document/9404497",
+      logo: "<i class='fas fa-file-alt'></i>",
+    },
+    {
+      title:
+        "Performance Comparison of Two Statistical Parametric Methods for Outlier Detection and Correction",
+      link: "https://www.sciencedirect.com/science/article/pii/S2405896321014919",
       logo: "<i class='fas fa-file-alt'></i>",
     },
   ];
