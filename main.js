@@ -10,21 +10,24 @@ document.addEventListener(
 
 function loadSkillsPage() {
   var skills = [
-    { name: "C", image: "./assets/c.png" },
-    { name: "C++", image: "./assets/cpp.png" },
-    { name: "Java", image: "./assets/java.png" },
-    { name: "Python", image: "./assets/python.png" },
-    { name: "HTML", image: "./assets/HTML5.png" },
-    { name: "CSS", image: "./assets/css3.png" },
-    { name: "JavaScript", image: "./assets/javascript.png" },
-    { name: "ReactJs", image: "./assets/reactjs.png" },
-    { name: "AngularJs", image: "./assets/angularjs.svg" },
-    { name: "Matlab", image: "./assets/matlab.png" },
-    { name: "Git", image: "./assets/git.png" },
+    { name: "C", image: "https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" },
+    { name: "C++", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+    { name: "Java", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+    { name: "Python", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { name: "HTML", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+    { name: "CSS", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+    { name: "JavaScript", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" },
+    { name: "ReactJs", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+    { name: "AngularJs", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" },
+    { name: "NodeJs", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+    { name: "ExpressJs", image: "./assets/express.png" },
+    { name: "MongoDB", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original-wordmark.svg" },
+    { name: "Matlab", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg" },
+    { name: "Git", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
     { name: "GitHub", image: "./assets/github.png" },
     { name: "Discord.py", image: "./assets/discord.png" },
     { name: "VS Code", image: "./assets/vs_code.svg" },
-    { name: "Ubuntu", image: "./assets/ubuntu.png" },
+    { name: "Manjaro", image: "https://user-images.githubusercontent.com/63140632/145705669-2050df14-6b64-44a9-aa66-dd62bafb4936.png" },
   ];
 
   var allSkills = document.getElementById("all-skills");

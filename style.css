@@ -142,7 +142,7 @@ body {
 
 .home-text h1 {
     font-size: 60px;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 10px;
 }
 
@@ -238,7 +238,7 @@ body {
 }
 
 .about-main h1 {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 30px;
     text-align: center;
     margin-bottom: 10px;
@@ -302,7 +302,7 @@ body {
 }
 
 .skills-main h1 {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 30px;
     text-align: center;
     margin-bottom: 10px;
@@ -346,7 +346,7 @@ body {
 }
 
 .projects-container h1 {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 30px;
     text-align: center;
     margin-top: 70px;
@@ -444,7 +444,7 @@ body {
 }
 
 .research-profiles h1 {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 30px;
     text-align: center;
     margin: 15px;
@@ -471,7 +471,7 @@ body {
 }
 
 .research-papers h1 {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 30px;
     text-align: center;
     margin: 15px;
@@ -545,7 +545,7 @@ body {
 }
 
 .connect h1 {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 30px;
     text-align: center;
     margin-bottom: 30px;
@@ -585,7 +585,7 @@ body {
 }
 
 .say-hi h1 {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 30px;
     text-align: center;
     margin-bottom: 30px;
@@ -832,6 +832,10 @@ footer h3{
         transition: all 0.25s ease-in-out;
         color: white;
         margin-right: 10px;
+    }
+
+    .about-main p {
+        font-size: 17px;
     }
 }
 
