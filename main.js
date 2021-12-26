@@ -92,6 +92,14 @@ function loadProjectsPage() {
       deploy: "",
       repo: "https://github.com/csivitu/riddler-frontend-2021",
     },
+    {
+      title: "Otôbus",
+      image: "./assets/otobus.png",
+      description:
+        "A MEAN Stack project for Bus Management System having features like view, book and cancel buses.",
+      deploy: "",
+      repo: "https://github.com/nimishjn/otobus-frontend",
+    },
   ];
 
   var allProjects = document.getElementById("all-projects");
