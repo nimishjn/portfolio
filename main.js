@@ -100,6 +100,14 @@ function loadProjectsPage() {
       deploy: "",
       repo: "https://github.com/nimishjn/otobus-frontend",
     },
+    {
+      title: "CCS-CSIVIT",
+      image: "./assets/ccs-csivit.png",
+      description:
+        "The official website for Core Committee Selections for CSI-VIT built using MERN stack.",
+      deploy: "",
+      repo: "https://github.com/nimishjn/otobus-frontend",
+    },
   ];
 
   var allProjects = document.getElementById("all-projects");
