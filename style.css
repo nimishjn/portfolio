@@ -94,7 +94,8 @@ body {
     justify-content: flex-end;
 }
 
-.mobile-navbar, #hamburger {
+.mobile-navbar,
+#hamburger {
     display: none;
 }
 
@@ -161,7 +162,7 @@ body {
     margin: 20px 0px;
 }
 
-.home-socials a{
+.home-socials a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -174,7 +175,7 @@ body {
     border-radius: 50%;
 }
 
-.home-socials a:hover{
+.home-socials a:hover {
     background-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -387,14 +388,15 @@ body {
 }
 
 .project-card h2 {
-    font-size: 24px;
+    font-size: 20px;
     text-align: center;
     margin: 10px 0px;
 }
 
 .project-card p {
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 10px;
+    text-align: justify;
 }
 
 .project-buttons {
@@ -613,7 +615,7 @@ body {
     transition: all 0.25s ease-in-out;
 }
 
-.say-hi input:focus{
+.say-hi input:focus {
     outline: none;
     border-color: var(--blue);
 }
@@ -648,7 +650,7 @@ footer {
     position: relative;
 }
 
-footer h3{
+footer h3 {
     font-weight: 400;
     font-size: 15px;
     text-align: center;
@@ -722,7 +724,7 @@ footer h3{
         color: var(--text);
         border: none;
     }
-    
+
     .mobile-navbar button:hover {
         cursor: pointer;
     }
@@ -732,13 +734,13 @@ footer h3{
     }
 
     .mobile-navbar li {
-        
+
         padding: 10px;
         font-size: 16px;
         transition: all 0.25s ease-in-out;
         width: 100%;
     }
-    
+
     .mobile-navbar li:hover {
         background-color: var(--blue);
     }
@@ -769,7 +771,8 @@ footer h3{
         flex-direction: column;
     }
 
-    .research-profiles, .research-papers {
+    .research-profiles,
+    .research-papers {
         width: 100%;
         margin: 0px;
     }
@@ -797,12 +800,12 @@ footer h3{
     .home-text h1 {
         font-size: 40px;
     }
-    
+
     .home-text h2 {
         font-size: 20px;
     }
 
-    .home-socials a{
+    .home-socials a {
         padding: 4px;
         width: 30px;
         height: 30px;
@@ -840,4 +843,3 @@ footer h3{
         font-size: 17px;
     }
 }
-

@@ -25,9 +25,16 @@ function loadSkillsPage() {
     { name: "Matlab", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg" },
     { name: "Git", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
     { name: "GitHub", image: "./assets/github.png" },
-    { name: "Discord.py", image: "./assets/discord.png" },
+    { name: "Discord.js", image: "./assets/discord.png" },
     { name: "VS Code", image: "./assets/vs_code.svg" },
     { name: "Manjaro", image: "https://user-images.githubusercontent.com/63140632/145705669-2050df14-6b64-44a9-aa66-dd62bafb4936.png" },
+    { name: "NextJs", image: "https://user-images.githubusercontent.com/63140632/159057943-66bda3ce-5f77-41e7-814e-fc57f6e3540a.svg" },
+    { name: "SASS", image: "https://user-images.githubusercontent.com/63140632/159058821-9e2c882c-b0cd-4248-9ec5-5f87c32e4f3c.svg" },
+    { name: "JQuery", image: "https://user-images.githubusercontent.com/63140632/138343999-b14291bb-a436-47c8-8b6e-8e27843f2228.png" },
+    { name: "Tailwind", image: "https://user-images.githubusercontent.com/63140632/155379705-ba343eb1-9336-49ed-8cb2-14e476320433.svg" },
+    { name: "MySQL", image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" },
+    { name: "IntelliJ", image: "https://user-images.githubusercontent.com/63140632/159059401-30767299-0aff-471b-a4d5-f0cf1b740902.svg" },
+    { name: "Figma", image: "https://user-images.githubusercontent.com/63140632/159059723-a6c20188-ea00-45b0-a930-fbcf1a4e804d.svg" },
   ];
 
   var allSkills = document.getElementById("all-skills");
@@ -46,67 +53,51 @@ function loadSkillsPage() {
 function loadProjectsPage() {
   projects = [
     {
-      title: "Expense tracker",
-      image: "./assets/expense.png",
+      title: "DC Official Website",
+      image: "./assets/dc-official.png",
       description:
-        "Add your expenses along with description and date and get the total expense.",
-      deploy: "https://nimishjn.github.io/ADG-WebDev-Task2/",
-      repo: "https://github.com/nimishjn/ADG-WebDev-Task2/",
-    },
-    {
-      title: "Quiz using API",
-      image: "./assets/quiz.png",
-      description:
-        "Takes the questions from an API and renders a 10 questions quiz.",
-      deploy: "https://nimishjn.github.io/ADG-WebDev-Task3/",
-      repo: "https://github.com/nimishjn/ADG-WebDev-Task3/",
-    },
-    {
-      title: "Links",
-      image: "./assets/links.png",
-      description: "Used to host all my skills and links on one website",
-      deploy: "https://links.nimish-jain.com/",
-      repo: "https://github.com/nimishjn/links/",
-    },
-    {
-      title: "Resume",
-      image: "./assets/resume.png",
-      description:
-        "A person can visit this website to either view or download my resume.",
-      deploy: "https://resume.nimish-jain.com/",
-      repo: "https://github.com/nimishjn/resume/",
-    },
-    {
-      title: "Portfolio Website",
-      image: "./assets/portfolio.png",
-      description:
-        "Portfolio website to display my skills, projects, research work, etc.",
-      deploy: "https://www.nimish-jain.com/",
-      repo: "https://github.com/nimishjn/portfolio/",
-    },
-    {
-      title: "Riddler Frontend 2021",
-      image: "./assets/riddler.png",
-      description:
-        "Frontend of Riddler game website made using reactjs framework and various npm packages.",
+        "Contributing to and maintaining the official website for Design and Code built using ReactJs.",
       deploy: "",
-      repo: "https://github.com/csivitu/riddler-frontend-2021",
+      repo: "https://github.com/csivitu/CCS-Frontend-2022",
+    },
+    {
+      title: "Core Committee Selections",
+      image: "./assets/ccs-csivit.png",
+      description:
+        "The official website for Core Committee Selections for CSI-VIT built using MERN stack.",
+      deploy: "",
+      repo: "https://github.com/csivitu/CCS-Frontend-2022",
     },
     {
       title: "Otôbus",
       image: "./assets/otobus.png",
       description:
         "A MEAN Stack project for Bus Management System having features like view, book and cancel buses.",
-      deploy: "",
-      repo: "https://github.com/nimishjn/otobus-frontend",
+      deploy: "https://designandcode.us",
+      repo: "https://github.com/Design-and-Code/Design-and-Code",
     },
     {
-      title: "CCS-CSIVIT",
-      image: "./assets/ccs-csivit.png",
+      title: "Riddler Frontend 2021",
+      image: "./assets/riddler.png",
       description:
-        "The official website for Core Committee Selections for CSI-VIT built using MERN stack.",
+        "Frontend of Riddler game website made using ReactJs framework and various npm packages.",
       deploy: "",
-      repo: "https://github.com/nimishjn/otobus-frontend",
+      repo: "https://github.com/csivitu/riddler-frontend-2021",
+    },
+    {
+      title: "Portfolio Website",
+      image: "./assets/portfolio.png",
+      description:
+        "Portfolio website to display my skills, projects, research work, etc built using HTML, CSS and JavaScript.",
+      deploy: "https://www.nimish-jain.com/",
+      repo: "https://github.com/nimishjn/portfolio/",
+    },
+    {
+      title: "Links",
+      image: "./assets/links.png",
+      description: "Used to host all my skills and links in one website.",
+      deploy: "https://links.nimish-jain.com/",
+      repo: "https://github.com/nimishjn/links/",
     },
   ];
 
