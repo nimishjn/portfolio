@@ -186,6 +186,12 @@ function loadResearchPage() {
       link: "https://www.sciencedirect.com/science/article/pii/S2405896321014919",
       logo: "<i class='fas fa-file-alt'></i>",
     },
+    {
+      title:
+        "New Performance Evaluation Metrics for Outlier Detection and Correction",
+      link: "https://link.springer.com/chapter/10.1007/978-981-16-9033-4_63",
+      logo: "<i class='fas fa-file-alt'></i>",
+    },
   ];
 
   var allResearchPapers = document.getElementById("all-research-papers");
