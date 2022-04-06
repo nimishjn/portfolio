@@ -53,6 +53,14 @@ function loadSkillsPage() {
 function loadProjectsPage() {
   projects = [
     {
+      title: "ADG-VIT Official Website",
+      image: "./assets/adg-official.png",
+      description:
+        "The official website of Apple Developers Group, VIT Technical Club. Built using ReactJs and various npm packages.",
+      deploy: "https://adgvit.com",
+      repo: "https://github.com/ADG-VIT/ADG-VIT-Website",
+    },
+    {
       title: "DC Official Website",
       image: "./assets/dc-official.png",
       description:
@@ -184,6 +192,12 @@ function loadResearchPage() {
       title:
         "Performance Comparison of Two Statistical Parametric Methods for Outlier Detection and Correction",
       link: "https://www.sciencedirect.com/science/article/pii/S2405896321014919",
+      logo: "<i class='fas fa-file-alt'></i>",
+    },
+    {
+      title:
+        "New Performance Evaluation Metrics for Outlier Detection and Correction",
+      link: "https://link.springer.com/chapter/10.1007/978-981-16-9033-4_63",
       logo: "<i class='fas fa-file-alt'></i>",
     },
   ];
