@@ -62,7 +62,7 @@
   <body>
     <!-- Navbar -->
     <div id="nav" class="navbar-container">
-      <a class="nav-title" href="#home">< Nimish ></a>
+      <a class="nav-title" href="#home">&lt;Nimish&gt;</a>
       <ul class="desktop-navbar">
         <li><a href="#home">HOME</a></li>
         <li><a href="#about">ABOUT</a></li>
@@ -133,12 +133,13 @@
             <button onclick="window.location = '#contact';" active>
               <i class="fas fa-comment-dots"></i> GET IN TOUCH
             </button>
-            <button onclick="window.location = '#about';" active>
-              <i class="fas fa-arrow-alt-circle-down"></i> KNOW MORE
+            <button onclick="window.location.href = `https://resume.nimish-jain.com?src=portfolio`" active>
+              <i class="fas fa-file-alt"></i> VIEW RESUME
             </button>
           </div>
         </div>
         <img src="./assets/hello.svg" alt="Hello" />
+        <i class="fas fa-chevron-down home-down-arrow" onclick="window.location = '#about'"></i>
       </div>
 
       <!-- About -->
