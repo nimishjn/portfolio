@@ -89,8 +89,16 @@ function loadProjectsPage() {
       image: "./assets/riddler.png",
       description:
         "Frontend of Riddler game website made using ReactJs framework and various npm packages.",
-      deploy: "",
+      deploy: "https://riddler-sample.vercel.app/",
       repo: "https://github.com/csivitu/riddler-frontend-2021",
+    },
+    {
+      title: "CMS 2021",
+      image: "./assets/cms.png",
+      description:
+        "A contact management system built using MySQL and JavaFX.",
+      deploy: "",
+      repo: "https://github.com/nimishjn/contact-management-system-mysql-javafx",
     },
     {
       title: "Portfolio Website",
