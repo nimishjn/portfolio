@@ -93,6 +93,14 @@ function loadProjectsPage() {
       repo: "https://github.com/csivitu/riddler-frontend-2021",
     },
     {
+      title: "LaserTag Frontend 2021",
+      image: "./assets/lasertag.png",
+      description:
+        "Frontend of LaserTag Slot Booking Portal made using ReactJs framework.",
+      deploy: "",
+      repo: "https://github.com/csivitu/LaserTag-Frontend",
+    },
+    {
       title: "CMS 2021",
       image: "./assets/cms.png",
       description:
