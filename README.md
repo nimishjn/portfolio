@@ -2,6 +2,8 @@
 
 Portfolio website made using HTML, CSS and JavaScript.
 
+## [Click here](https://github.com/nimishjn/portfolio-2022) to visit new portfolio
+
 ## Screenshots
 <details>
   <summary>Show screenshots</summary>
