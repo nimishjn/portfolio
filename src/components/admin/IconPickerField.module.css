@@ -1,0 +1,156 @@
+/* Colours, radii and rings come from payload-theme's variables, with Payload's own as fallbacks. */
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--pt-input-border, var(--theme-elevation-150));
+  border-radius: var(--pt-radius-ctl, var(--style-radius-s));
+  background: var(--theme-input-bg, var(--theme-elevation-0));
+  color: var(--theme-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+.trigger:hover:not(:disabled) {
+  border-color: var(--theme-elevation-400);
+}
+.trigger:focus-visible {
+  outline: none;
+  border-color: var(--pt-accent, var(--theme-elevation-800));
+  box-shadow: 0 0 0 3px var(--pt-accent-ring, transparent);
+}
+.trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.preview {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  color: var(--theme-elevation-800);
+}
+.name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.change {
+  flex: none;
+  font-size: 12px;
+  color: var(--theme-elevation-500);
+}
+
+/* Drawer ------------------------------------------------------------------ */
+
+.picker {
+  display: grid;
+  gap: 28px;
+  padding-bottom: 48px;
+}
+
+.searchBar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding-block: 12px;
+  background: var(--theme-bg);
+}
+.search {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--pt-input-border, var(--theme-elevation-150));
+  border-radius: var(--pt-radius-ctl, var(--style-radius-s));
+  background: var(--theme-input-bg, var(--theme-elevation-0));
+  color: var(--theme-text);
+  font: inherit;
+  font-size: 15px;
+}
+.search:focus {
+  outline: none;
+  border-color: var(--pt-accent, var(--theme-elevation-800));
+  box-shadow: 0 0 0 3px var(--pt-accent-ring, transparent);
+}
+
+.heading {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.count {
+  font-weight: 400;
+  color: var(--theme-elevation-500);
+  font-variant-numeric: tabular-nums;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 8px;
+}
+
+.tile {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 10px;
+  min-width: 0;
+  height: 88px;
+  padding: 14px 8px 10px;
+  border: 1px solid var(--theme-elevation-100);
+  border-radius: var(--pt-radius-item, var(--style-radius-s));
+  background: var(--theme-elevation-0);
+  color: var(--theme-text);
+  font: inherit;
+  cursor: pointer;
+  /* Nearly 1,900 tiles: skip rendering the ones scrolled out of view. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 88px;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s;
+}
+.tile:hover {
+  border-color: var(--theme-elevation-300);
+  background: var(--theme-elevation-50);
+}
+.tile:focus-visible {
+  outline: 2px solid var(--pt-accent, var(--theme-elevation-800));
+  outline-offset: 2px;
+}
+.tile[aria-pressed='true'] {
+  border-color: var(--pt-accent, var(--theme-elevation-800));
+  background: var(--theme-elevation-50);
+  color: var(--pt-accent, var(--theme-text));
+  box-shadow: inset 0 0 0 1px var(--pt-accent, var(--theme-elevation-800));
+}
+.tileLabel {
+  max-width: 100%;
+  overflow: hidden;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--theme-elevation-600);
+}
+
+.note {
+  margin: 0;
+  font-size: 13px;
+  color: var(--theme-elevation-500);
+}

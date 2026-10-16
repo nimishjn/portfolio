@@ -1,0 +1,50 @@
+pnpm lint-staged
+
+# Status lines in lint-staged's style for the checks below. On a terminal a dim pending line is
+# rewritten in place with the result; elsewhere (an editor's git panel) only the result prints.
+if [ -t 1 ]; then
+  pending() { printf '\033[2m◼ %s\033[0m' "$1"; }
+  result() { printf '\r\033[K%b %s\n' "$1" "$2"; }
+  OK='\033[32m✔\033[0m' FAIL='\033[31m✖\033[0m' SKIP='\033[33m↓\033[0m'
+else
+  pending() { :; }
+  result() { printf '%b %s\n' "$1" "$2"; }
+  OK='✔' FAIL='✖' SKIP='↓'
+fi
+
+# Type check of the whole project, since a change in one file can break another. Skipped when no
+# TypeScript is staged, so a docs-only commit doesn't wait for it.
+label="Type-checking the project (tsc)..."
+if git diff --cached --name-only --diff-filter=ACMRD | grep -qE '\.(ts|tsx)$'; then
+  pending "$label"
+  if out=$(pnpm -s typecheck 2>&1); then
+    result "$OK" "$label"
+  else
+    result "$FAIL" "$label"
+    printf '%s\n' "$out"
+    exit 1
+  fi
+else
+  result "$SKIP" "$label skipped — no TypeScript staged"
+fi
+
+# Secret scan of the staged changes only, to stop a credential before it enters history. Skipped
+# when gitleaks isn't installed, so a missing tool never pushes anyone towards --no-verify.
+label="Scanning staged changes for secrets (gitleaks)..."
+if command -v gitleaks >/dev/null 2>&1; then
+  pending "$label"
+  # --redact keeps the secret itself out of terminal scrollback.
+  if leaks=$(gitleaks git --staged --redact --verbose --no-color --no-banner --log-level error 2>&1); then
+    result "$OK" "$label"
+  else
+    result "$FAIL" "$label"
+    printf '%s\n' "$leaks"
+    echo ""
+    echo "gitleaks: a staged change looks like a credential."
+    echo "  • false positive?  add an inline '# gitleaks:allow' comment on that line."
+    echo "  • real secret?     unstage it, then rotate the credential."
+    exit 1
+  fi
+else
+  result "$SKIP" "$label skipped — gitleaks is not installed (brew install gitleaks)"
+fi

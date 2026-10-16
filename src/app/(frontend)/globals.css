@@ -1,0 +1,1298 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ tokens */
+
+/* `.theme-light` pins a subtree to the light palette (the CV page is always light). */
+:root,
+.theme-light {
+  --bg: #fcfcfb;
+  --fg: #141416;
+  --muted: #5b5c64;
+  --line: #e6e6e2;
+  --line-strong: #d3d3ce;
+  --chip: #f1f1ee;
+  --card: #ffffff;
+  --accent: #2546c9;
+  --accent-weak: #ebeffc;
+  --on-accent: #ffffff;
+  --ok: #1f8a4c;
+  --grid: rgb(20 20 22 / 0.055);
+  --header: rgb(252 252 251 / 0.74);
+  --shadow: 0 1px 0 rgb(20 20 22 / 0.03), 0 14px 32px -22px rgb(20 20 22 / 0.22);
+  --glow: color-mix(in srgb, var(--accent) 16%, transparent);
+  --spot: color-mix(in srgb, var(--accent) 8%, transparent);
+  --gutter: clamp(16px, 4vw, 40px);
+  --header-h: 61px;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0f1012;
+  --fg: #ececee;
+  --muted: #a3a4ac;
+  --line: #28292d;
+  --line-strong: #3a3b41;
+  --chip: #1a1b1e;
+  --card: #141519;
+  --accent: #9cb1ff;
+  --accent-weak: #1c2243;
+  --on-accent: #0f1012;
+  --ok: #5bd08a;
+  --grid: rgb(236 236 238 / 0.05);
+  --header: rgb(15 16 18 / 0.72);
+  --shadow: 0 1px 0 rgb(255 255 255 / 0.02), 0 14px 32px -22px rgb(0 0 0 / 0.8);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-chip: var(--chip);
+  --color-card: var(--card);
+  --color-accent: var(--accent);
+  --color-accent-weak: var(--accent-weak);
+  --color-on-accent: var(--on-accent);
+  --color-ok: var(--ok);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ease-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* -------------------------------------------------------------------- base */
+
+@layer base {
+  html {
+    background-color: var(--bg);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background: var(--accent-weak);
+    color: var(--fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  section[id] {
+    scroll-margin-top: calc(var(--header-h) + 24px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Set for a moment while the theme switches, so every surface cross-fades together. */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    fill 0.3s ease,
+    stroke 0.3s ease !important;
+}
+
+/* -------------------------------------------------------------- components */
+
+@layer components {
+  /* Links ---------------------------------------------------------------- */
+  .lnk {
+    color: inherit;
+    text-decoration: none;
+    background: linear-gradient(var(--accent), var(--accent)) 0 100% / 0 1px no-repeat;
+    transition:
+      background-size 0.35s var(--ease-soft),
+      color 0.2s;
+  }
+  .lnk:hover,
+  .lnk:focus-visible {
+    background-size: 100% 1px;
+    color: var(--accent);
+  }
+  /* Inline links in running text keep a faint underline so they read as links. */
+  .lnk-u {
+    background:
+      linear-gradient(var(--accent), var(--accent)) 0 100% / 0 1px no-repeat,
+      linear-gradient(var(--line-strong), var(--line-strong)) 0 100% / 100% 1px no-repeat;
+  }
+  .lnk-u:hover,
+  .lnk-u:focus-visible {
+    background-size:
+      100% 1px,
+      100% 1px;
+  }
+
+  /* Pills and buttons ---------------------------------------------------- */
+  .pill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font: inherit;
+    font-size: 13px;
+    line-height: 1;
+    color: var(--muted);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 9px 13px;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      color 0.2s,
+      border-color 0.2s,
+      background-color 0.2s,
+      transform 0.15s;
+  }
+  .pill::after {
+    content: '';
+    position: absolute;
+    inset: -6px -3px;
+  }
+  .pill:hover {
+    color: var(--fg);
+    border-color: var(--fg);
+  }
+  .pill:active {
+    transform: scale(0.97);
+  }
+  .pill.is-on,
+  .pill[aria-expanded='true'] {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-weak);
+  }
+  .pill-sm {
+    padding: 8px 12px;
+  }
+
+  .arrow {
+    flex: none;
+    transition: transform 0.25s var(--ease-soft);
+  }
+  :is(.pill, .row-link, .aux-link):hover .arrow {
+    transform: translate(2px, -2px);
+  }
+
+  .chev {
+    flex: none;
+    transition: transform 0.3s var(--ease-soft);
+  }
+  [aria-expanded='true'] .chev {
+    transform: rotate(180deg);
+  }
+
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    padding: 12px 18px 12px 16px;
+    border-radius: 999px;
+    border: 0;
+    background: var(--accent);
+    color: var(--on-accent);
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.18),
+      0 10px 24px -14px var(--accent);
+    transition:
+      transform 0.25s var(--ease-soft),
+      filter 0.2s,
+      box-shadow 0.25s;
+  }
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.07);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.18),
+      0 14px 28px -14px var(--accent);
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }
+  .btn-icon {
+    transition: transform 0.3s var(--ease-soft);
+  }
+  .btn:hover .btn-icon {
+    transform: translateY(2px);
+  }
+
+  .icon-btn {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    flex: none;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--fg);
+    cursor: pointer;
+    transition:
+      border-color 0.2s,
+      transform 0.4s var(--ease-soft);
+  }
+  .icon-btn::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+  }
+  .icon-btn:hover {
+    border-color: var(--fg);
+  }
+  .icon-btn:active {
+    transform: rotate(-20deg) scale(0.94);
+  }
+
+  .theme-icon-sun {
+    display: none;
+  }
+  .dark .theme-icon-sun {
+    display: block;
+  }
+  .dark .theme-icon-moon {
+    display: none;
+  }
+  .theme-animate .theme-icon {
+    animation: spin-in 0.45s var(--ease-soft);
+  }
+
+  /* Small parts ---------------------------------------------------------- */
+  .tag {
+    font-size: 14px;
+    line-height: 1.2;
+    color: var(--fg);
+    background: var(--chip);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 9px 15px;
+    transition:
+      border-color 0.2s,
+      transform 0.2s var(--ease-soft);
+  }
+  .tag:hover {
+    border-color: var(--line);
+    transform: translateY(-1px);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    line-height: 1;
+    padding: 5px 8px;
+    border-radius: 7px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1;
+    padding: 5px 8px;
+    border-radius: 999px;
+    background: var(--accent-weak);
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .tile {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    flex: none;
+    border-radius: 9px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+  }
+
+  /* Hatched tile with a double ring; holds the photo once one is uploaded. */
+  .portrait {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid var(--line);
+    background:
+      repeating-linear-gradient(135deg, var(--chip) 0 6px, transparent 6px 12px),
+      var(--card);
+    box-shadow:
+      0 0 0 6px var(--bg),
+      0 0 0 7px var(--line);
+  }
+  @media (max-width: 640px) {
+    .portrait {
+      width: 96px;
+      height: 96px;
+      border-radius: 20px;
+    }
+  }
+
+  /* An uploaded logo, drawn as a silhouette in the tile's text colour (--logo is set inline). */
+  .tile-logo {
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-color: currentColor;
+    -webkit-mask: var(--logo) center / contain no-repeat;
+    mask: var(--logo) center / contain no-repeat;
+  }
+  .tile {
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+  }
+  .tl-row:hover .tile {
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+  }
+
+  .live {
+    position: relative;
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ok);
+  }
+  .live::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--ok);
+    animation: ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  .live-still::after {
+    display: none;
+  }
+
+  /* Page background ------------------------------------------------------ */
+  .bgfx {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  /* Grid lines sit on a 40px lattice centred on the page, so the content column
+     (800px) and the rails (880px) land exactly on grid lines. */
+  .bgfx-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: calc(50% + 20px) 0;
+    mask-image: linear-gradient(to bottom, #000, rgb(0 0 0 / 0.45) 760px, rgb(0 0 0 / 0.2) 1800px);
+  }
+  .bgfx-glow {
+    position: absolute;
+    left: 50%;
+    top: -360px;
+    width: min(1200px, 150vw);
+    height: 760px;
+    transform: translateX(-50%);
+    background: radial-gradient(closest-side, var(--glow), transparent);
+  }
+
+  /* Layout --------------------------------------------------------------- */
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  @media (min-width: 960px) {
+    .wrap::before,
+    .wrap::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--line), var(--line) 94%, transparent);
+    }
+    .wrap::before {
+      left: 0;
+    }
+    .wrap::after {
+      right: 0;
+    }
+  }
+
+  /* First tab stop: jumps past the header straight to the content. */
+  .skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 60;
+    transform: translateY(-160%);
+    transition: transform 0.2s var(--ease-soft);
+  }
+  .skip-link:focus-visible {
+    transform: none;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: var(--header);
+    backdrop-filter: saturate(1.5) blur(14px);
+    -webkit-backdrop-filter: saturate(1.5) blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-link {
+    position: relative;
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-size: 14px;
+    color: var(--muted);
+    white-space: nowrap;
+    transition:
+      color 0.2s,
+      background-color 0.2s;
+  }
+  .nav-link:hover {
+    color: var(--fg);
+    background: var(--chip);
+  }
+  @media (max-width: 640px) {
+    .site-nav {
+      order: 3;
+      flex-basis: 100%;
+      margin-inline: -12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .site-nav::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /* Section heading: a hairline that runs rail to rail, with crosshair marks
+     where it meets the rails on wide screens. */
+  .sh {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+    padding-top: 22px;
+    margin-bottom: 24px;
+  }
+  .sh::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(-1 * var(--gutter));
+    right: calc(-1 * var(--gutter));
+    height: 1px;
+    background: var(--line);
+  }
+  .sh-x {
+    position: absolute;
+    top: -4px;
+    width: 9px;
+    height: 9px;
+    display: none;
+    background:
+      linear-gradient(var(--muted), var(--muted)) 50% 0 / 1px 100% no-repeat,
+      linear-gradient(var(--muted), var(--muted)) 0 50% / 100% 1px no-repeat;
+    opacity: 0.6;
+  }
+  .sh-x-l {
+    left: calc(-1 * var(--gutter) - 4px);
+  }
+  .sh-x-r {
+    right: calc(-1 * var(--gutter) - 4px);
+  }
+  @media (min-width: 960px) {
+    .sh-x {
+      display: block;
+    }
+  }
+
+  /* Cards: a soft accent spotlight follows the pointer (--mx/--my are set in JS). */
+  .card {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background:
+      radial-gradient(380px circle at var(--mx, -999px) var(--my, -999px), var(--spot), transparent 60%),
+      var(--card);
+    box-shadow: var(--shadow);
+    transition:
+      border-color 0.25s,
+      transform 0.4s var(--ease-soft);
+  }
+  .card:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-2px);
+  }
+
+  /* Disclosure panel: animates height with grid rows; hidden panels drop out of
+     the tab order through visibility. */
+  .disclosure {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      grid-template-rows 0.35s var(--ease-soft),
+      opacity 0.25s,
+      visibility 0s 0.35s;
+  }
+  .disclosure[data-open='true'] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    visibility: visible;
+    transition:
+      grid-template-rows 0.35s var(--ease-soft),
+      opacity 0.25s 0.05s,
+      visibility 0s;
+  }
+  .disclosure > div {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .dash-list > li {
+    position: relative;
+    padding-left: 16px;
+    margin-top: 6px;
+  }
+  .dash-list > li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 7px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  /* Timeline ------------------------------------------------------------- */
+  .tl {
+    --tl-date: 10.5rem;
+    position: relative;
+  }
+  .tl::before {
+    content: '';
+    position: absolute;
+    top: 29px;
+    bottom: 24px;
+    left: calc(var(--tl-date) + 27.5px);
+    width: 1px;
+    background: linear-gradient(to bottom, var(--line-strong), var(--line) 70%, transparent);
+  }
+  .tl-row {
+    display: grid;
+    grid-template-columns: var(--tl-date) 24px minmax(0, 1fr);
+    column-gap: 16px;
+    align-items: start;
+    width: 100%;
+    padding: 14px 0;
+    text-align: left;
+  }
+  /* Transparent toggle over the whole row; the organisation link sits above it. */
+  .tl-toggle {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .tl-org {
+    position: relative;
+    z-index: 2;
+  }
+  .tl-row[data-open='true'] .chev {
+    transform: rotate(180deg);
+  }
+  .tl-date {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    line-height: 30px;
+    color: var(--muted);
+  }
+  .tl-node {
+    position: relative;
+    justify-self: center;
+    margin-top: 9.5px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    box-shadow: inset 0 0 0 1.5px var(--line-strong);
+    transition:
+      box-shadow 0.2s,
+      transform 0.3s var(--ease-soft);
+  }
+  .tl-node-now {
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-weak);
+  }
+  .tl-node-now::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  .tl-row:hover .tl-node {
+    transform: scale(1.2);
+    box-shadow: inset 0 0 0 1.5px var(--accent);
+  }
+  .tl-row:hover .tl-node-now {
+    box-shadow: 0 0 0 4px var(--accent-weak);
+  }
+  .tl-row:hover .tl-role {
+    color: var(--accent);
+  }
+  /* Hovering the organisation link highlights the link, not the whole row. */
+  .tl-row:has(.tl-org:hover) .tl-role {
+    color: inherit;
+  }
+  .tl-bullets {
+    padding: 0 0 18px calc(var(--tl-date) + 100px);
+  }
+  @media (max-width: 640px) {
+    .tl::before {
+      left: 11.5px;
+      top: 24px;
+    }
+    .tl-row {
+      grid-template-columns: 24px minmax(0, 1fr);
+      row-gap: 4px;
+    }
+    .tl-date {
+      grid-column: 2;
+      grid-row: 1;
+      line-height: 20px;
+    }
+    .tl-node {
+      grid-column: 1;
+      grid-row: 1;
+      margin-top: 4.5px;
+    }
+    .tl-main {
+      grid-column: 2;
+      grid-row: 2;
+    }
+    .tl-bullets {
+      padding-left: 84px;
+    }
+  }
+
+  /* Credits chart -------------------------------------------------------- */
+  .bar-row {
+    display: grid;
+    grid-template-columns: minmax(0, 11rem) minmax(0, 1fr) 2rem;
+    align-items: center;
+    column-gap: 14px;
+    padding: 3px 0;
+    font-size: 13.5px;
+    color: var(--muted);
+    cursor: default;
+    transition: color 0.2s;
+  }
+  .bar-row:hover {
+    color: var(--fg);
+  }
+  .bar-track {
+    height: 8px;
+    border-radius: 0 4px 4px 0;
+    background: var(--chip);
+  }
+  .bar-fill {
+    display: block;
+    height: 100%;
+    border-radius: 0 4px 4px 0;
+    background: var(--accent);
+    transform-origin: left center;
+    animation: grow 1s var(--ease-soft) both;
+    transition: filter 0.2s;
+  }
+  .bar-row:hover .bar-fill {
+    filter: brightness(1.12);
+  }
+  @media (max-width: 640px) {
+    .bar-row {
+      grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr) 2rem;
+      column-gap: 10px;
+      font-size: 13px;
+    }
+  }
+
+  .course-chip {
+    transition:
+      border-color 0.2s,
+      transform 0.2s var(--ease-soft);
+  }
+  .course-chip:hover {
+    border-color: var(--fg);
+    transform: translateY(-1px);
+  }
+  .disclosure[data-open='true'] .course-chip {
+    animation: rise 0.35s var(--ease-soft) both;
+  }
+
+  /* Publication figures -------------------------------------------------- */
+  .fig .ax {
+    stroke: var(--line-strong);
+    stroke-width: 1;
+  }
+  .fig .mut {
+    fill: none;
+    stroke: var(--muted);
+    stroke-width: 1.2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    opacity: 0.55;
+  }
+  .fig .acc {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.8;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  /* Lines with class "draw" and pathLength="100" redraw on card hover. The dash pattern
+     exists only while animating, so a line without pathLength still looks solid at rest. */
+  .card:hover .draw {
+    animation: draw 1s var(--ease-soft);
+  }
+  .fig .dot {
+    fill: var(--muted);
+    opacity: 0.6;
+  }
+  .fig .adot {
+    fill: var(--accent);
+    stroke: var(--chip);
+    stroke-width: 1.5;
+  }
+  .fig .ring {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1;
+    opacity: 0.4;
+  }
+  .fig .ghost {
+    fill: var(--chip);
+    stroke: var(--accent);
+    stroke-width: 1.2;
+  }
+  .fig .band {
+    fill: var(--accent-weak);
+  }
+  .fig .dash {
+    fill: none;
+    stroke: var(--muted);
+    stroke-width: 1;
+    stroke-dasharray: 2 3;
+    opacity: 0.6;
+  }
+  .fig .adash {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.2;
+    stroke-dasharray: 2 2.5;
+  }
+  .fig .hex {
+    font-family: var(--font-mono);
+    font-size: 7.5px;
+    fill: var(--muted);
+    opacity: 0.75;
+  }
+  .fig .sheet {
+    fill: var(--card);
+    stroke: var(--line-strong);
+    stroke-width: 1;
+  }
+  .fig .sheet-back {
+    opacity: 0.6;
+  }
+
+  /* Project previews ----------------------------------------------------- */
+  .preview {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 20px 20px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 20px 20px,
+      var(--chip);
+  }
+  @media (max-width: 640px) {
+    .preview {
+      height: 150px;
+    }
+  }
+  .preview > svg,
+  .preview-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s var(--ease-soft);
+  }
+  .preview-art > svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .card:hover .preview > svg,
+  .card:hover .preview-art {
+    transform: scale(1.035);
+  }
+
+  /* "Personal" / "Built at …" label on project cards. */
+  .ctx {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    line-height: 1;
+    padding: 5px 9px 5px 7px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .pv .c-a {
+    fill: var(--accent-weak);
+  }
+  .pv .c-b {
+    fill: var(--card);
+  }
+  .pv .c-c {
+    fill: color-mix(in srgb, var(--accent) 34%, var(--card));
+  }
+  .pv .c-d {
+    fill: color-mix(in srgb, var(--fg) 9%, var(--card));
+  }
+  .pv .pattern {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .pv .node {
+    fill: var(--accent);
+    stroke: var(--card);
+    stroke-width: 2.5;
+  }
+  .pv .panel {
+    fill: var(--card);
+    stroke: var(--line);
+    stroke-width: 1;
+  }
+  .pv .field {
+    fill: var(--bg);
+    stroke: var(--line-strong);
+    stroke-width: 1;
+  }
+  .pv .t {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    fill: var(--muted);
+  }
+  .pv .t-on {
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    font-weight: 500;
+    fill: var(--on-accent);
+  }
+  .pv .t-acc {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    fill: var(--accent);
+  }
+  .pv .mid {
+    text-anchor: middle;
+  }
+  .pv .btn-r {
+    fill: var(--accent);
+  }
+  .pv .pw {
+    fill: var(--fg);
+  }
+  .pv .ok {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .pv .edge {
+    stroke: var(--line-strong);
+    stroke-width: 1.2;
+  }
+  .pv .edge-on {
+    stroke: var(--accent);
+    stroke-width: 1.6;
+    opacity: 0.75;
+  }
+  .pv .n-done {
+    fill: var(--accent);
+    stroke: var(--card);
+    stroke-width: 2;
+  }
+  .pv .n-lock {
+    fill: var(--card);
+    stroke: var(--line-strong);
+    stroke-width: 1.4;
+  }
+  .pv .n-cur {
+    fill: var(--card);
+    stroke: var(--accent);
+    stroke-width: 2;
+  }
+  .pv .n-in {
+    fill: var(--accent);
+  }
+  .pv .n-ring {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1;
+    opacity: 0.4;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .card:hover .pv .n-ring {
+    animation: ring 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  .pv .sk {
+    fill: var(--line);
+  }
+  .pv .sk-a,
+  .pv .hint {
+    fill: var(--accent-weak);
+  }
+  .pv .caret {
+    fill: var(--accent);
+  }
+  .card:hover .pv .caret {
+    animation: blink 1.1s steps(1, end) infinite;
+  }
+
+  /* Rows that are links (writing) ---------------------------------------- */
+  .row-link:hover .row-title {
+    color: var(--accent);
+  }
+
+  /* Entrance ------------------------------------------------------------- */
+  .reveal {
+    animation: rise 0.7s var(--ease-soft) both;
+    animation-delay: var(--delay, 0s);
+  }
+}
+
+/* -------------------------------------------------------------- keyframes */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  80%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@keyframes spin-in {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ring {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.pop {
+  animation: pop 0.35s var(--ease-soft);
+}
+
+/* ------------------------------------------------------------------- CV */
+
+@layer components {
+  .cv-page {
+    min-height: 100dvh;
+    background: #ecece8;
+    color: #141416;
+    color-scheme: light;
+    padding: 20px 16px 64px;
+  }
+  .cv-toolbar {
+    max-width: 794px;
+    margin: 0 auto 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .cv-sheet {
+    --cv-muted: #5b5c64;
+    --cv-rule: #c9c9c4;
+    --cv-accent: #2546c9;
+    --cv-accent-weak: #ebeffc;
+    box-sizing: border-box;
+    max-width: 794px;
+    margin: 0 auto;
+    padding: 72px;
+    background: #ffffff;
+    color: #141416;
+    line-height: 1.5;
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 0.06),
+      0 24px 48px -24px rgb(0 0 0 / 0.25);
+  }
+  .cv-sheet a {
+    color: var(--cv-accent);
+  }
+  .cv-section {
+    margin-top: 28px;
+  }
+  .cv-h2 {
+    margin: 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--cv-rule);
+    font-size: 1.125em;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .cv-row {
+    display: grid;
+    grid-template-columns: 9em minmax(0, 1fr);
+    column-gap: 24px;
+    margin-top: 14px;
+  }
+  .cv-row-tight {
+    margin-top: 8px;
+  }
+  .cv-pair {
+    display: grid;
+    grid-template-columns: 7em minmax(0, 1fr);
+    column-gap: 12px;
+  }
+  .cv-label,
+  .cv-meta {
+    font-family: var(--font-mono);
+    font-size: 0.8125em;
+    line-height: 1.846;
+    color: var(--cv-muted);
+  }
+  .cv-muted {
+    color: var(--cv-muted);
+  }
+  .cv-me {
+    font-weight: 600;
+    color: #141416;
+  }
+  .cv-ph {
+    color: var(--cv-accent);
+    background: var(--cv-accent-weak);
+    border-radius: 4px;
+    padding: 0 4px;
+  }
+  @media (max-width: 720px) {
+    .cv-sheet {
+      padding: 32px 20px;
+    }
+    .cv-row {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .cv-pairs {
+      grid-template-columns: minmax(0, 1fr) !important;
+      grid-template-rows: none !important;
+      grid-auto-flow: row !important;
+    }
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 18mm 19mm;
+
+    @bottom-left {
+      content: 'Nimish Jain · Curriculum vitae';
+      font-family: ui-monospace, monospace;
+      font-size: 8pt;
+      color: #5b5c64;
+    }
+    @bottom-right {
+      content: counter(page) ' / ' counter(pages);
+      font-family: ui-monospace, monospace;
+      font-size: 8pt;
+      color: #5b5c64;
+    }
+  }
+  html,
+  body,
+  .cv-page {
+    background: #ffffff !important;
+  }
+  .cv-page {
+    padding: 0;
+  }
+  .cv-toolbar {
+    display: none;
+  }
+  .cv-sheet {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+  .cv-row,
+  .cv-pair,
+  .cv-closing {
+    break-inside: avoid;
+  }
+  .cv-h2 {
+    break-after: avoid;
+  }
+}
+
+/* ---------------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

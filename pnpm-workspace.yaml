@@ -1,0 +1,11 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  '@tailwindcss/oxide': true
+
+overrides:
+  # payload-theme 0.9.4 reads lucide's old `__iconNode` export, which newer lucide-react
+  # releases replaced with `__iconData`; without this pin every admin icon renders empty.
+  # Matches the version payload-theme is tested against. Revisit when upgrading payload-theme.
+  'payload-theme>lucide-react': 1.24.0
