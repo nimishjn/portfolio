@@ -36,11 +36,14 @@ export function SiteFooter({ profile }: { profile: Profile }) {
           </p>
         </div>
       </div>
-      <div className="mt-7 flex flex-wrap justify-between gap-x-6 gap-y-2 border-t border-dashed border-line pt-5 text-[13px] text-muted">
+      <div className="mt-7 flex flex-wrap items-start justify-between gap-x-6 gap-y-2 border-t border-dashed border-line pt-5 text-[13px] text-muted">
         <a className="lnk" href={`mailto:${profile.email}`}>
           {profile.email}
         </a>
-        <span className="font-mono text-xs">© {year} · Built with Next.js and Payload CMS</span>
+        <div className="flex flex-col items-end gap-1 font-mono text-xs text-balance max-sm:items-start">
+          <p>Built with Claude Code, Next.js and Payload CMS</p>
+          <p>© {year} · Deployed on Vercel</p>
+        </div>
       </div>
     </footer>
   )

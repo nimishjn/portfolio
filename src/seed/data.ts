@@ -423,6 +423,16 @@ export const projects: RequiredDataFromCollectionSlug<'projects'>[] = [
     sortOrder: 4,
   },
   {
+    title: 'nimish-jain.com',
+    year: 2026,
+    context: 'personal',
+    description:
+      'The site you’re on: a portfolio and CV whose content is all edited in Payload CMS. Pages are static and refresh on save, the CV prints to an A4 PDF, and drawings like the one above follow light and dark mode.',
+    stack: [{ label: 'Next.js' }, { label: 'Payload CMS' }, { label: 'Tailwind CSS' }, { label: 'Vercel' }],
+    previewSvg: previews.portfolio,
+    sortOrder: 5,
+  },
+  {
     title: 'Password + image-pattern authentication',
     year: 2023,
     context: 'personal',
@@ -435,7 +445,7 @@ export const projects: RequiredDataFromCollectionSlug<'projects'>[] = [
       { label: 'Write-up', url: 'https://nimishjn.medium.com/a37a3e599009' },
     ],
     previewSvg: previews['pattern-grid'],
-    sortOrder: 5,
+    sortOrder: 6,
   },
   {
     title: 'Riddler — online cryptic hunt',
@@ -450,7 +460,7 @@ export const projects: RequiredDataFromCollectionSlug<'projects'>[] = [
       { label: 'Demo', url: 'https://riddler-sample.vercel.app' },
     ],
     previewSvg: previews['riddle-map'],
-    sortOrder: 6,
+    sortOrder: 7,
   },
 ]
 
