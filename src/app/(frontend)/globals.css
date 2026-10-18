@@ -906,6 +906,18 @@ html.theme-transition *::after {
     transform: scale(1.035);
   }
 
+  /* Projects revealed by Show more rise into place. `backwards` leaves no transform behind,
+     so the card's own hover lift still works afterwards. */
+  .show-more > * {
+    animation: rise 0.45s var(--ease-soft) backwards;
+  }
+  .show-more > :nth-child(2) {
+    animation-delay: 0.06s;
+  }
+  .show-more > :nth-child(n + 3) {
+    animation-delay: 0.12s;
+  }
+
   /* "Personal" / "Built at …" label on project cards. */
   .ctx {
     display: inline-flex;

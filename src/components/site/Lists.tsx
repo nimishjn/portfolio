@@ -33,6 +33,9 @@ export function Service({ items }: { items: ServiceItem[] }) {
 }
 
 export function Writing({ items }: { items: WritingItem[] }) {
+  // No empty section: it appears once an article is added under Content → Writing.
+  if (items.length === 0) return null
+
   return (
     <Section index="07" title="Writing" delay={0.36}>
       <div className="flex flex-col">

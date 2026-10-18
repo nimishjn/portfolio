@@ -60,6 +60,12 @@ Everything on the site comes from the CMS. Collections live in `src/collections`
 | Content → Education, Courses | Degrees and schools; coursework grouped by area for the credit chart |
 | Content → Projects, Service, Writing | The remaining sections |
 
+- **Projects:** the home page shows the first four, by sort order. The rest sit behind **Show more**.
+- **Writing:** the section only appears while there is at least one article.
+- **Collapsed content:** everything a visitor has to open is still in the page's HTML for search engines,
+  only hidden until opened. That covers summaries, BibTeX, coursework, role details and the projects behind
+  Show more. The study-intent line is the exception: while it's off, it isn't rendered at all.
+
 ### Organisation logos and links
 
 - **Logos:** Experiences, Leadership & service, and Education have an optional **Logo** in the sidebar. Upload
