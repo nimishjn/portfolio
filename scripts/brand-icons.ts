@@ -1,6 +1,6 @@
 /**
- * Generates the favicon set in public/ from one vector source: lowercase "nj" in white
- * monoline strokes on a cobalt tile, with the site's green "live" dot as the j's dot.
+ * Generates the favicon set in public/ from one vector source: "nj" in Geist Mono Medium with
+ * a block caret, white on a cobalt tile (the header's wordmark ends in the same caret).
  *
  *   pnpm icons
  *
@@ -12,15 +12,13 @@ import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
 
 const COBALT = '#2546C9'
-const GREEN = '#5BD08A'
 
-const glyph = [
-  `<g fill="none" stroke="#fff" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round">`,
-  `<path d="M9.5 19.75V11.25M9.5 14.5a3.75 3.75 0 0 1 7.5 0v5.25"/>`,
-  `<path d="M22.5 11.25v10a3.5 3.5 0 0 1-3.5 3.5h-1"/>`,
-  `</g>`,
-  `<circle cx="22.5" cy="6.75" r="1.85" fill="${GREEN}"/>`,
-].join('')
+// The letters are outlines taken from GeistMono-Medium.ttf (fontTools), placed as SVG text would
+// set "nj" at x 4.5, baseline 21.5, size 15.5 and letter-spacing -0.5, so the icon looks the same
+// wherever the font isn't installed. Re-extract them if the font or that placement changes.
+const NJ = 'M5.74 21.5V13.254H7.181L7.213 14.742Q7.538 13.889 8.236 13.479Q8.933 13.068 9.801 13.068Q10.715 13.068 11.328 13.479Q11.94 13.889 12.25 14.595Q12.56 15.3 12.56 16.184V21.5H10.995V16.587Q10.995 14.432 9.351 14.432Q8.499 14.432 7.902 14.99Q7.306 15.548 7.306 16.617V21.5Z M14.943 23.825V22.508H17.454Q18.09 22.508 18.392 22.229Q18.694 21.95 18.694 21.206V14.572H15.067V13.254H20.275V21.299Q20.275 22.523 19.624 23.174Q18.973 23.825 17.625 23.825ZM18.648 12.06V10.433H20.26V12.06Z'
+
+const glyph = [`<path d="${NJ}" fill="#fff"/>`, `<rect x="23" y="9.25" width="3.6" height="14.5" rx="0.6" fill="#fff"/>`].join('')
 
 /** The mark on a 32-unit grid. `radius` rounds the tile; `scale` shrinks the glyph. */
 function markSvg({ radius = 8, scale = 1 }: { radius?: number; scale?: number } = {}) {

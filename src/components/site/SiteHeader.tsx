@@ -15,8 +15,9 @@ export function SiteHeader({ name }: { name: string }) {
   return (
     <header className="site-header">
       <div className="mx-auto flex max-w-[880px] flex-wrap items-center gap-x-4 gap-y-2 px-(--gutter) py-3">
-        <a href="#top" className="mr-auto text-[15px] font-semibold tracking-[-0.01em]">
+        <a href="#top" className="wordmark mr-auto">
           {name}
+          <span className="wordmark-caret" aria-hidden="true" />
         </a>
         <nav aria-label="Sections" className="site-nav flex items-center gap-0.5">
           {NAV.map((item) => (

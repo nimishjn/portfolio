@@ -163,8 +163,8 @@ The admin panel is themed with [`payload-theme`](https://github.com/liderbektas/
 (it searches documents too), and a split login page. The header has a light/dark toggle and a live
 customiser; the customiser's changes are saved in your browser only.
 
-- The logo images (the "Nimish Jain" wordmark) come from `/brand/logo-light.png` and `/brand/logo-dark.png`,
-  rendered by `src/app/(frontend)/brand/[asset]/route.tsx`.
+- The logo images (the `nimish jain` wordmark with its accent block, as in the site header) come from
+  `/brand/logo-light.png` and `/brand/logo-dark.png`, rendered by `src/app/(frontend)/brand/[asset]/route.tsx`.
 - `pnpm-workspace.yaml` pins the theme's copy of `lucide-react` to 1.24.0. Newer `lucide-react` releases
   renamed the icon export that payload-theme 0.9.4 reads, which leaves every admin icon blank. Drop the
   override once payload-theme supports current `lucide-react`.
@@ -203,9 +203,13 @@ After the password, the admin asks for a 6-digit code from an authenticator app.
 
 ## Favicon, banner and SEO
 
-- **Favicon:** lowercase "nj" in white on a cobalt tile, with the site's green "live" dot over the j. It is
-  defined once in `scripts/brand-icons.ts`; `pnpm icons` regenerates `public/favicon.svg`, `favicon.ico`
-  (16/32/48), `apple-touch-icon.png` and the manifest icons. The admin panel uses the same favicon.
+- **Logo:** the header shows `nimish jain` in Geist Mono, ending in an accent-coloured block caret
+  (`.wordmark` in `globals.css`). There is no icon beside it.
+- **Favicon:** "nj" in Geist Mono with the same block caret, white on a cobalt tile. The letters are
+  outlines taken from the font, so the icon looks the same where Geist Mono isn't installed. It is defined
+  once in `scripts/brand-icons.ts`; `pnpm icons` regenerates `public/favicon.svg`, `favicon.ico` (16/32/48),
+  `apple-touch-icon.png` and the manifest icons. The admin panel, the banners and the `/cv` preview image
+  use the same icon.
 - **Banners:** `pnpm banners` saves four PNGs to `public/banners`:
 
   | File | Size | Use |

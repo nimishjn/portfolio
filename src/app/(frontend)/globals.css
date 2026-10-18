@@ -496,6 +496,27 @@ html.theme-transition *::after {
     -webkit-backdrop-filter: saturate(1.5) blur(14px);
     border-bottom: 1px solid var(--line);
   }
+
+  /* The logo: the name in Geist Mono, shown lowercase (the markup keeps its capitals for screen
+     readers), ending in the accent block caret from the site icon. */
+  .wordmark {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    text-transform: lowercase;
+    white-space: nowrap;
+  }
+  .wordmark-caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 0.95em;
+    margin-left: 0.12em;
+    vertical-align: -0.12em;
+    border-radius: 0.06em;
+    background: var(--accent);
+  }
   .nav-link {
     position: relative;
     padding: 8px 12px;
