@@ -492,30 +492,29 @@ html.theme-transition *::after {
     top: 0;
     z-index: 30;
     background: var(--header);
+    /* Unprefixed only: the CSS build adds -webkit- for older Safari itself. Written out by hand,
+       the prefixed copy replaced this one, and Chrome, Edge and Firefox lost the blur. */
     backdrop-filter: saturate(1.5) blur(14px);
-    -webkit-backdrop-filter: saturate(1.5) blur(14px);
     border-bottom: 1px solid var(--line);
   }
 
-  /* The logo: the name in Geist Mono, shown lowercase (the markup keeps its capitals for screen
-     readers), ending in the accent block caret from the site icon. */
+  /* The logo (Wordmark.tsx): an SVG sized in ems, so font-size sets its size. Its accent caret
+     blinks while the link is hovered or focused, like the cursor in the project drawings. */
   .wordmark {
-    font-family: var(--font-mono);
+    display: inline-flex;
     font-size: 15px;
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    text-transform: lowercase;
-    white-space: nowrap;
+    color: var(--fg);
+  }
+  .wordmark-svg {
+    display: block;
+    width: auto;
+    height: 0.98em;
   }
   .wordmark-caret {
-    display: inline-block;
-    width: 0.55em;
-    height: 0.95em;
-    margin-left: 0.12em;
-    vertical-align: -0.12em;
-    border-radius: 0.06em;
-    background: var(--accent);
+    fill: var(--accent);
+  }
+  .wordmark:is(:hover, :focus-visible) .wordmark-caret {
+    animation: blink 1.1s steps(1, end) infinite;
   }
   .nav-link {
     position: relative;

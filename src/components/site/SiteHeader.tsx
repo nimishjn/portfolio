@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { FileIcon } from '@/components/icons'
 
 import { ThemeToggle } from './ThemeToggle'
+import { Wordmark } from './Wordmark'
 
 const NAV = [
   { href: '#research', label: 'Research' },
@@ -16,8 +17,7 @@ export function SiteHeader({ name }: { name: string }) {
     <header className="site-header">
       <div className="mx-auto flex max-w-[880px] flex-wrap items-center gap-x-4 gap-y-2 px-(--gutter) py-3">
         <a href="#top" className="wordmark mr-auto">
-          {name}
-          <span className="wordmark-caret" aria-hidden="true" />
+          <Wordmark name={name} />
         </a>
         <nav aria-label="Sections" className="site-nav flex items-center gap-0.5">
           {NAV.map((item) => (

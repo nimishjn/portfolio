@@ -203,8 +203,10 @@ After the password, the admin asks for a 6-digit code from an authenticator app.
 
 ## Favicon, banner and SEO
 
-- **Logo:** the header shows `nimish jain` in Geist Mono, ending in an accent-coloured block caret
-  (`.wordmark` in `globals.css`). There is no icon beside it.
+- **Logo:** the header shows `nimish jain` in Geist Mono, ending in an accent-coloured block caret that
+  blinks while the logo is hovered or focused. There is no icon beside it. It's an inline SVG
+  (`src/components/site/Wordmark.tsx`) with the letters as outlines taken from the font, so it never waits
+  for Geist Mono to load; re-extract them if the name or font changes.
 - **Favicon:** "nj" in Geist Mono with the same block caret, white on a cobalt tile. The letters are
   outlines taken from the font, so the icon looks the same where Geist Mono isn't installed. It is defined
   once in `scripts/brand-icons.ts`; `pnpm icons` regenerates `public/favicon.svg`, `favicon.ico` (16/32/48),

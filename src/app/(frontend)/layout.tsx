@@ -8,8 +8,8 @@ import { siteUrl } from '@/lib/site'
 
 import './globals.css'
 
-// Self-hosted at build time, Latin subset only. Both are preloaded: the mono face sets the
-// header's wordmark as well as the small labels.
+// Self-hosted at build time, Latin subset only. Both are preloaded: the mono face sets labels
+// above the fold, such as the subtitle under the name.
 const geistSans = Geist({ subsets: ['latin'], variable: '--font-geist-sans', display: 'swap' })
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono', display: 'swap' })
 
