@@ -15,13 +15,27 @@ function readStoredTheme() {
   }
 }
 
+/**
+ * Switches the theme in one piece. Where the browser supports view transitions, the whole page
+ * crossfades as a single image (0.3 s, in globals.css), so every surface, line, shadow and drawing
+ * changes together. Otherwise, and for visitors who prefer less motion, it switches instantly.
+ * Element transitions are off meanwhile, so nothing animates on its own timing.
+ */
 function applyTheme(dark: boolean) {
   const root = document.documentElement
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    root.classList.add('theme-transition', 'theme-animate')
-    window.setTimeout(() => root.classList.remove('theme-transition'), 350)
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const flip = () => root.classList.toggle('dark', dark)
+  const done = () => root.classList.remove('theme-switching')
+  root.classList.add('theme-switching')
+  if (!reduceMotion) root.classList.add('theme-animate')
+
+  if (reduceMotion || typeof document.startViewTransition !== 'function') {
+    flip()
+    // Transitions stay off until the new colours have been painted.
+    requestAnimationFrame(() => requestAnimationFrame(done))
+    return
   }
-  root.classList.toggle('dark', dark)
+  document.startViewTransition(flip).finished.finally(done)
 }
 
 // The theme lives on <html class="dark">; subscribe to that instead of mirroring it in state.

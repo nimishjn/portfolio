@@ -102,17 +102,19 @@
   }
 }
 
-/* Set for a moment while the theme switches, so every surface cross-fades together. */
-html.theme-transition,
-html.theme-transition *,
-html.theme-transition *::before,
-html.theme-transition *::after {
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease,
-    color 0.3s ease,
-    fill 0.3s ease,
-    stroke 0.3s ease !important;
+/* While the theme switches (ThemeToggle.tsx) nothing transitions on its own: the page changes in
+   one piece, crossfaded as a single image by a view transition where the browser supports it.
+   Fading each element instead left gradients, shadows and some lines to jump on their own. */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+  animation-timing-function: ease;
 }
 
 /* -------------------------------------------------------------- components */
