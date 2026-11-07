@@ -54,8 +54,11 @@ function venueLine(item: Publication) {
   )
 }
 
-/** The tabular, German-style academic CV. Screen and print share this markup. */
-export function CvDocument({ content }: { content: Content }) {
+/**
+ * The tabular, German-style academic CV. Screen and print share this markup. `personal` adds the
+ * phone number, date of birth and nationality, which only the full print view asks for.
+ */
+export function CvDocument({ content, personal = false }: { content: Content; personal?: boolean }) {
   const { profile, cv, education, courseAreas, publications, work, internships, service } = content
   const orcid = linkByIcon(content, 'orcid')
   const github = linkByIcon(content, 'github')
@@ -80,12 +83,16 @@ export function CvDocument({ content }: { content: Content }) {
 
       <section className="cv-section mt-8">
         <h2 className="cv-h2">Personal details</h2>
-        <dl className="cv-pairs mt-3.5 grid grid-flow-col grid-cols-2 grid-rows-5 gap-x-6 gap-y-1.5">
+        <dl className={`cv-pairs mt-3.5 grid grid-flow-col grid-cols-2 gap-x-6 gap-y-1.5 ${personal ? 'grid-rows-5' : 'grid-rows-3'}`}>
           <Pair label="Name">{profile.name}</Pair>
           <Pair label="Location">{cv.location}</Pair>
-          <Pair label="Phone">{withPlaceholders(cv.phone)}</Pair>
-          <Pair label="Date of birth">{withPlaceholders(cv.dateOfBirth)}</Pair>
-          <Pair label="Nationality">{withPlaceholders(cv.nationality)}</Pair>
+          {personal && (
+            <>
+              <Pair label="Phone">{withPlaceholders(cv.phone)}</Pair>
+              <Pair label="Date of birth">{withPlaceholders(cv.dateOfBirth)}</Pair>
+              <Pair label="Nationality">{withPlaceholders(cv.nationality)}</Pair>
+            </>
+          )}
           <Pair label="Email">
             <a className="cv-meta" href={`mailto:${profile.email}`}>
               {profile.email}

@@ -44,7 +44,13 @@ export const Profile: GlobalConfig = {
                   defaultValue: false,
                   admin: { description: 'An optional line under the bio. Off by default.' },
                 },
-                { name: 'studyIntentText', type: 'text' },
+                {
+                  name: 'studyIntentText',
+                  type: 'text',
+                  // Only the page decides whether to show it; the public API never returns it.
+                  access: { read: ({ req }) => Boolean(req.user) },
+                  admin: { description: 'Not included in the public API, even while the line is on.' },
+                },
               ],
             },
             {

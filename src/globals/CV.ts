@@ -3,6 +3,15 @@ import type { GlobalConfig } from 'payload'
 import { revalidateGlobal } from '../hooks/revalidate'
 import { publicRead } from '../lib/access'
 
+/**
+ * Phone, date of birth and nationality belong in the CV that is sent with an application, not on
+ * a web page: the public /cv and the API leave them out, and only the signed-in print view
+ * (/cv/print?full=1) includes them.
+ */
+const privateDetail = {
+  access: { read: ({ req }: { req: { user?: unknown } }) => Boolean(req.user) },
+}
+
 export const CV: GlobalConfig = {
   slug: 'cv',
   label: 'CV',
@@ -39,15 +48,20 @@ export const CV: GlobalConfig = {
     {
       type: 'row',
       fields: [
-        { name: 'phone', type: 'text', defaultValue: '[TBD]' },
+        { name: 'phone', type: 'text', defaultValue: '[TBD]', ...privateDetail },
         { name: 'location', type: 'text', required: true },
       ],
     },
     {
       type: 'row',
       fields: [
-        { name: 'dateOfBirth', type: 'text', admin: { description: 'Optional for English-taught programmes.' } },
-        { name: 'nationality', type: 'text' },
+        {
+          name: 'dateOfBirth',
+          type: 'text',
+          ...privateDetail,
+          admin: { description: 'Optional for English-taught programmes. Only in the full print view, like the phone number and nationality.' },
+        },
+        { name: 'nationality', type: 'text', ...privateDetail },
       ],
     },
     {

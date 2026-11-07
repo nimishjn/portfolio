@@ -8,6 +8,7 @@ import * as migration_20261016_103331_drop_figure_presets from './20261016_10333
 import * as migration_20261016_145402_two_factor from './20261016_145402_two_factor';
 import * as migration_20261016_161032_cv_pdf_upload from './20261016_161032_cv_pdf_upload';
 import * as migration_20261016_164024_resume_pdf from './20261016_164024_resume_pdf';
+import * as migration_20261025_095658 from './20261025_095658_totp_last_step';
 
 export const migrations = [
   {
@@ -58,6 +59,11 @@ export const migrations = [
   {
     up: migration_20261016_164024_resume_pdf.up,
     down: migration_20261016_164024_resume_pdf.down,
-    name: '20261016_164024_resume_pdf'
+    name: '20261016_164024_resume_pdf',
+  },
+  {
+    up: migration_20261025_095658.up,
+    down: migration_20261025_095658.down,
+    name: '20261025_095658_totp_last_step'
   },
 ];

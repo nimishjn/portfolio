@@ -16,7 +16,7 @@ Design source of truth: the "nimish-jain.com v2" canvas in Claude Design (privat
 | `/` | Home page: intro, publications, education (with a coursework credit chart), experience and internship timelines, projects, service, writing |
 | `/cv` | Tabular, German-style academic CV; prints to A4 with its own print stylesheet |
 | `/cv.pdf` | The CV as a PDF, uploaded under Site → CV in the admin; redirects to `/cv` until one is |
-| `/cv/print` | The CV rendered fresh from the database, opening the print dialog (for saving the PDF; not indexed) |
+| `/cv/print` | The CV rendered fresh from the database, opening the print dialog (for saving the PDF; signed-in admin only; `?full=1` adds the personal details) |
 | `/resume.pdf` | A one-page resume, uploaded under Site → Resume; not linked from the site or indexed, and redirects to `/cv` until one is uploaded |
 | `/admin` | Payload admin for all content |
 | `/banners/*.png` | Link-preview image and social headers (LinkedIn, X, GitHub), made by `pnpm banners` |
@@ -53,7 +53,7 @@ Everything on the site comes from the CMS. Collections live in `src/collections`
 | In the admin | Holds |
 | --- | --- |
 | Site → Profile | Name, subtitle, bio, links, research interests, study-intent line (off by default), portrait, meta description, "last updated" |
-| Site → CV | The PDF at `/cv.pdf`, and CV-only details: phone, date of birth, nationality, languages, skills, the place and date at the end, body size |
+| Site → CV | The PDF at `/cv.pdf`, and CV-only details: phone, date of birth and nationality (full print view only), languages, skills, the place and date at the end, body size |
 | Site → Resume | The PDF at `/resume.pdf` (only signed-in users can read this page's data) |
 | Content → Publications | Citation data, BibTeX, summary, and which illustration the card shows |
 | Content → Experiences | Work experience and internships (`kind`), with site summary, bullets and the CV line |
@@ -64,7 +64,8 @@ Everything on the site comes from the CMS. Collections live in `src/collections`
 - **Writing:** the section only appears while there is at least one article.
 - **Collapsed content:** everything a visitor has to open is still in the page's HTML for search engines,
   only hidden until opened. That covers summaries, BibTeX, coursework, role details and the projects behind
-  Show more. The study-intent line is the exception: while it's off, it isn't rendered at all.
+  Show more. The study-intent line is the exception: while it's off, it isn't rendered at all, and its
+  text is never part of the public API (only a signed-in user can read that field).
 
 ### Organisation logos and links
 
@@ -201,6 +202,33 @@ After the password, the admin asks for a 6-digit code from an authenticator app.
 - **`src/proxy.ts`:** passes the requested admin path to the plugin, which needs it to redirect to the code
   page without looping. It runs on `/admin` only.
 
+## Security headers
+
+`headers()` in `next.config.ts` sets them all; HSTS comes from Vercel.
+
+- **Every response:**
+  - `X-Content-Type-Options: nosniff`
+  - `X-Frame-Options: DENY`
+  - `Referrer-Policy: strict-origin-when-cross-origin`
+  - a `Permissions-Policy` that turns off the camera, microphone, location, payments, USB and Topics
+  - `Cross-Origin-Opener-Policy: same-origin`
+- **No `X-Powered-By`:** `poweredByHeader: false`. Payload's colour-scheme client hints (`Accept-CH`,
+  `Critical-CH`, `Vary`) are limited to `/admin`, the only place that reads them.
+- **Content-Security-Policy, production builds only:**
+  - **Pages:** everything comes from the site's own origin. Scripts are allowed inline, because the pages are
+    prerendered and can't carry a per-request nonce. So the policy doesn't stop injected inline script. It
+    does keep out other origins, plugins, framing, `<base>` changes and form posts to other sites.
+  - **Admin:** the page policy plus:
+    - jsDelivr, for Monaco (the code fields) and its `blob:` workers;
+    - Google Fonts, for payload-theme's Geist;
+    - Vercel Blob, for stored files and client uploads.
+  - **No policy of ours:** `/api`, whose SVG uploads Payload serves with its own `script-src 'none'`;
+    `/_next`; and the two PDFs.
+- **Testing:** `next dev` runs without the CSP, so test changes with `pnpm build && pnpm start` and watch the
+  browser console for "Refused to load…".
+- **New third parties:** an analytics script, an embed or a font from another host has to be added to the
+  matching policy, or browsers block it. The Vercel toolbar (`vercel.live`) is left out on purpose.
+
 ## Favicon, banner and SEO
 
 - **Logo:** the header shows `nimish jain` in Geist Mono, ending in an accent-coloured block caret that
@@ -247,13 +275,19 @@ with no commit or deploy. To make one after changing the CV:
 
 1. Save your changes.
 2. Click **Open print view** in that PDF section. It opens `/cv/print`, which is rendered from the database
-   on every request (unlike the cached `/cv`), and opens the print dialog.
+   on every request (unlike the cached `/cv`), and opens the print dialog. Only a signed-in admin can open
+   it; everyone else gets a 404.
 3. Choose **Save as PDF**, turn off **Headers and footers**, and save. Use Chrome: other browsers leave out
    the page footer with your name and the page numbers.
 4. Upload the file in the PDF field and save.
 
-The files live in **Admin → Documents** (Vercel Blob in production, `/documents` locally). Until the CV has
-a PDF, the site hides its Download buttons and `/cv.pdf` redirects to `/cv`.
+**Personal details.** The phone number, date of birth and nationality never appear on `/cv`, in the public
+PDF or in the API. **Open full print view** (`/cv/print?full=1`) adds them, for the copy you send with an
+application; keep that file off the site.
+
+The files live in **Admin → Documents** (Vercel Blob in production, `/documents` locally), which only a
+signed-in user can list; `/cv.pdf` and `/resume.pdf` are the public way to them. Until the CV has a PDF, the
+site hides its Download buttons and `/cv.pdf` redirects to `/cv`.
 
 **Resume:** a resume made elsewhere goes under **Site → Resume** and is served at `/resume.pdf`. Nothing on the
 site links to it and search engines are asked not to index it, so it's shared by link. Until one is

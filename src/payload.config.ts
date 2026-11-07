@@ -30,6 +30,8 @@ const databaseUrl = process.env.DATABASE_URL || ''
 export default buildConfig({
   admin: {
     user: Users.slug,
+    // Payload's own avatar rather than Gravatar's, which would be sent a hash of the admin's email.
+    avatar: 'default',
     importMap: {
       baseDir: path.resolve(dirname),
     },

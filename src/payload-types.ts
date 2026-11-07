@@ -508,6 +508,7 @@ export interface TotpAttempt {
   id: string;
   attempts: number;
   lockUntil?: string | null;
+  lastStep?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -862,6 +863,7 @@ export interface TotpAttemptsSelect<T extends boolean = true> {
   id?: T;
   attempts?: T;
   lockUntil?: T;
+  lastStep?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -938,6 +940,9 @@ export interface Profile {
    * An optional line under the bio. Off by default.
    */
   showStudyIntent?: boolean | null;
+  /**
+   * Not included in the public API, even while the line is on.
+   */
   studyIntentText?: string | null;
   /**
    * Square photo, at least 480 × 480.
@@ -985,7 +990,7 @@ export interface Cv {
   phone?: string | null;
   location: string;
   /**
-   * Optional for English-taught programmes.
+   * Optional for English-taught programmes. Only in the full print view, like the phone number and nationality.
    */
   dateOfBirth?: string | null;
   nationality?: string | null;

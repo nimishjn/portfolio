@@ -8,3 +8,9 @@
   line-height: 1.6;
   color: var(--theme-elevation-800);
 }
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--base) * 0.4);
+}

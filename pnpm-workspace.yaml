@@ -9,3 +9,12 @@ overrides:
   # releases replaced with `__iconData`; without this pin every admin icon renders empty.
   # Matches the version payload-theme is tested against. Revisit when upgrading payload-theme.
   'payload-theme>lucide-react': 1.24.0
+
+  # Security pins (pnpm audit, 2026-10-25): Payload 3.92 still resolves these transitive packages to
+  # vulnerable versions. Drop each pin once Payload's own ranges move past it.
+  dompurify: 3.4.17
+  happy-dom: 21.0.4
+  'undici@^6.0.0': 6.29.1
+
+patchedDependencies:
+  payload-totp@3.0.6: patches/payload-totp@3.0.6.patch

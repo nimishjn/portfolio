@@ -1,0 +1,190 @@
+diff --git a/dist/api/remove.js b/dist/api/remove.js
+index fa381b3bd5fda101b502aacf2bcd934aef1a76e6..5df85d82d148d23746d038ea8130ec776b6b32e0 100644
+--- a/dist/api/remove.js
++++ b/dist/api/remove.js
+@@ -1,5 +1,5 @@
+ import { Secret, TOTP } from 'otpauth';
+-import { countCodeAttempt } from '../utilities/codeAttempts.js';
++import { countCodeAttempt, recordUsedStep, wasStepUsed } from '../utilities/codeAttempts.js';
+ import { getTotpSecret } from '../utilities/getTotpSecret.js';
+ import { removeCookie } from '../utilities/removeCookie.js';
+ export function removeEndpointHandler(pluginOptions) {
+@@ -68,6 +68,15 @@ export function removeEndpointHandler(pluginOptions) {
+                 ok: false
+             });
+         }
++        // The code's time step: refused when a code for it (or an earlier one) was already accepted.
++        const step = Math.floor(Date.now() / 1000 / (pluginOptions.totp?.period || 30)) + delta;
++        if (await wasStepUsed(payload, user.id, step)) {
++            return Response.json({
++                message: i18n.t('totpPlugin:setup:incorrectCode'),
++                ok: false
++            });
++        }
++        await recordUsedStep(payload, user.id, step);
+         await attempt.reset();
+         await payload.update({
+             id: user.id,
+diff --git a/dist/api/setSecret.js b/dist/api/setSecret.js
+index c52cbc8d99553d3cf27353dd6829defc950ba547..78f0b1a3a4763185f413966ff843846f34e14f89 100644
+--- a/dist/api/setSecret.js
++++ b/dist/api/setSecret.js
+@@ -1,5 +1,6 @@
+ import { Secret, TOTP } from 'otpauth';
+ import { setCookie } from '../setCookie.js';
++import { recordUsedStep, wasStepUsed } from '../utilities/codeAttempts.js';
+ import { resolveOriginalStrategy } from '../utilities/resolveOriginalStrategy.js';
+ export function setSecret(pluginOptions) {
+     const handler = async (req)=>{
+@@ -52,6 +53,15 @@ export function setSecret(pluginOptions) {
+                 ok: false
+             });
+         }
++        // The code's time step: refused when a code for it (or an earlier one) was already accepted.
++        const step = Math.floor(Date.now() / 1000 / (pluginOptions.totp?.period || 30)) + delta;
++        if (await wasStepUsed(payload, user.id, step)) {
++            return Response.json({
++                message: i18n.t('totpPlugin:setup:incorrectCode'),
++                ok: false
++            });
++        }
++        await recordUsedStep(payload, user.id, step);
+         await payload.update({
+             id: user.id,
+             collection: pluginOptions.collection,
+diff --git a/dist/api/verifyToken.js b/dist/api/verifyToken.js
+index 1f23541e8e92500175a99f64ffe01cf02e66d9dc..624065ded16520334b85a0abe812d29faee6fd3e 100644
+--- a/dist/api/verifyToken.js
++++ b/dist/api/verifyToken.js
+@@ -1,6 +1,6 @@
+ import { Secret, TOTP } from 'otpauth';
+ import { setCookie } from '../setCookie.js';
+-import { countCodeAttempt } from '../utilities/codeAttempts.js';
++import { countCodeAttempt, recordUsedStep, wasStepUsed } from '../utilities/codeAttempts.js';
+ import { getTotpSecret } from '../utilities/getTotpSecret.js';
+ import { resolveOriginalStrategy } from '../utilities/resolveOriginalStrategy.js';
+ export function verifyToken(pluginOptions) {
+@@ -68,6 +68,15 @@ export function verifyToken(pluginOptions) {
+                 ok: false
+             });
+         }
++        // The code's time step: refused when a code for it (or an earlier one) was already accepted.
++        const step = Math.floor(Date.now() / 1000 / (pluginOptions.totp?.period || 30)) + delta;
++        if (await wasStepUsed(payload, user.id, step)) {
++            return Response.json({
++                message: i18n.t('totpPlugin:setup:incorrectCode'),
++                ok: false
++            });
++        }
++        await recordUsedStep(payload, user.id, step);
+         await attempt.reset();
+         await setCookie({
+             authConfig: collection.config.auth,
+diff --git a/dist/setCookie.js b/dist/setCookie.js
+index 0b06981c03b01b49cc1d2b985a5176418f0b4801..d1fd1d1ef34795f97a540ab6ddc296140c986595 100644
+--- a/dist/setCookie.js
++++ b/dist/setCookie.js
+@@ -10,9 +10,14 @@ export async function setCookie({ authConfig, cookiePrefix, originalStrategy, se
+     if (!originalStrategyName || originalStrategyName === TOTP_STRATEGY_NAME) {
+         return;
+     }
++    // Bound to the login session: a copy of this cookie is useless with any other login of the
++    // same user, and logging out or resetting the password (which end the session) ends it too.
+     const token = jwt.sign({
+         originalStrategy: originalStrategyName,
+-        userId: user.id
++        userId: user.id,
++        ...user._sid ? {
++            sid: user._sid
++        } : {}
+     }, secret, {
+         expiresIn: authConfig.tokenExpiration || 7200
+     });
+diff --git a/dist/strategy.js b/dist/strategy.js
+index 7e8b04503736bf82ebfc1662e73976f9ac3ceb8f..f4e50c7d9ad2b47cc47a8a3eb34e05717ef81089 100644
+--- a/dist/strategy.js
++++ b/dist/strategy.js
+@@ -14,10 +14,12 @@ export const strategy = {
+         }
+         let userId;
+         let originalStrategyName;
++        let sid;
+         try {
+             const result = jwt.verify(token.value, payload.secret);
+             userId = result.userId;
+             originalStrategyName = result.originalStrategy;
++            sid = result.sid;
+         } catch (err) {
+             payload.logger.warn({
+                 err
+@@ -41,6 +43,12 @@ export const strategy = {
+             };
+         }
+         const originalStrategyResult = await originalStrategy.authenticate(args);
++        // Issued for another login session of this user (or before sessions were bound): not verified.
++        if (originalStrategyResult.user && (sid !== undefined || originalStrategyResult.user._sid !== undefined) && sid !== originalStrategyResult.user._sid) {
++            return {
++                user: null
++            };
++        }
+         if (originalStrategyResult.user?.id === userId) {
+             return {
+                 user: {
+diff --git a/dist/utilities/codeAttempts.js b/dist/utilities/codeAttempts.js
+index 12f3ab731a29bb2193f87f0632acf5dfe9702145..0184396752e320e20ca9ad7191165006586ca0d3 100644
+--- a/dist/utilities/codeAttempts.js
++++ b/dist/utilities/codeAttempts.js
+@@ -40,6 +40,11 @@ const TOTP_ATTEMPTS_SLUG = 'totp-attempts';
+         {
+             name: 'lockUntil',
+             type: 'date'
++        },
++        // The TOTP time step of the last code accepted, so a code cannot be accepted twice.
++        {
++            name: 'lastStep',
++            type: 'number'
+         }
+     ],
+     graphQL: false,
+@@ -176,6 +181,19 @@ const updateAttempts = (payload, userID, data)=>// The adapter types the row aft
+         }
+     };
+ }
++/**
++ * Whether a code for `step` (its TOTP counter) was already accepted. Steps only move forward,
++ * so anything at or before the last accepted one is a replay within the validation window.
++ */ export async function wasStepUsed(payload, userID, step) {
++    const row = await findAttempts(payload, userID);
++    return typeof row?.lastStep === 'number' && step <= row.lastStep;
++}
++/** Remembers the step of a code that was just accepted. */ export async function recordUsedStep(payload, userID, step) {
++    await findOrCreateAttempts(payload, userID);
++    await updateAttempts(payload, userID, {
++        lastStep: step
++    });
++}
+ /** Clears a user's count and lock, when Payload's unlock operation has lifted its own. */ export async function resetCodeAttempts(payload, userID) {
+     if (await findAttempts(payload, userID)) {
+         await updateAttempts(payload, userID, {
+diff --git a/dist/utilities/readTotpCookie.js b/dist/utilities/readTotpCookie.js
+index 2846071aa5111557eca400bc815345e4019f2cdf..ce5d4ebdc863c3db6305e6b43220177e854ae702 100644
+--- a/dist/utilities/readTotpCookie.js
++++ b/dist/utilities/readTotpCookie.js
+@@ -20,13 +20,16 @@ import { TOTP_STRATEGY_NAME } from '../constants.js';
+     } catch  {
+         return undefined;
+     }
+-    const { originalStrategy, userId } = decoded;
++    const { originalStrategy, sid, userId } = decoded;
+     if (typeof userId !== 'number' && typeof userId !== 'string') {
+         return undefined;
+     }
+     if (String(userId) !== String(user.id)) {
+         return undefined;
+     }
++    if ((sid !== undefined || user._sid !== undefined) && sid !== user._sid) {
++        return undefined;
++    }
+     // A cookie naming the TOTP strategy is self-referential: delegating to it would
+     // make the strategy call itself without a termination condition.
+     if (!originalStrategy || originalStrategy === TOTP_STRATEGY_NAME) {
