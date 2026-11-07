@@ -18,6 +18,8 @@ const assets = {
 type AssetName = keyof typeof assets
 
 export const dynamic = 'force-static'
+// Only the two names above exist; anything else is a 404 before this handler runs.
+export const dynamicParams = false
 
 export function generateStaticParams() {
   return Object.keys(assets).map((asset) => ({ asset }))
@@ -25,7 +27,8 @@ export function generateStaticParams() {
 
 export async function GET(_request: Request, { params }: { params: Promise<{ asset: string }> }) {
   const { asset } = await params
-  if (!(asset in assets)) return new Response('Not found', { status: 404 })
+  // `in` would also accept inherited names such as "constructor" and then crash on them.
+  if (!Object.hasOwn(assets, asset)) return new Response('Not found', { status: 404 })
 
   const { text, caret } = assets[asset as AssetName]
   return new ImageResponse(

@@ -69,15 +69,11 @@ const nextConfig: NextConfig = {
   // No X-Powered-By header; withPayload then leaves out its own as well.
   poweredByHeader: false,
   images: {
+    // Every image on the site is served through Payload's file route, so the optimizer takes
+    // nothing else: a remote pattern would let anyone proxy their own images through this origin.
     localPatterns: [
       {
         pathname: '/api/media/file/**',
-      },
-    ],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '*.public.blob.vercel-storage.com',
       },
     ],
   },

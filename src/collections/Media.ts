@@ -9,6 +9,11 @@ export const Media: CollectionConfig = {
     group: 'Admin',
   },
   ...publicRead,
+  // Anyone can read, but a visitor's file request has to match a row. With a plain `true`,
+  // Payload's file route skips that lookup and asks the storage for whatever name was typed,
+  // which on the shared Blob store means any file at its root. A query makes the route find
+  // the row first (image sizes included) and 404 otherwise.
+  access: { read: ({ req }) => (req.user ? true : { filename: { exists: true } }) },
   hooks: revalidateHooks,
   fields: [
     {

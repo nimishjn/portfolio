@@ -101,7 +101,9 @@ export default buildConfig({
       alwaysInsertFields: true,
       clientUploads: true,
       // /cv.pdf and /resume.pdf fetch their files straight from Blob, not through Payload's file route.
-      collections: { media: true, documents: { disablePayloadAccessControl: true } },
+      // Documents get their own folder in the store, so a PDF can never share a path with an image
+      // and be reached through the public media route. Files uploaded earlier keep their folders.
+      collections: { media: true, documents: { disablePayloadAccessControl: true, prefix: 'documents' } },
       token: process.env.BLOB_READ_WRITE_TOKEN,
     }),
     // Two-factor sign-in: after the password, the admin asks for a code from an authenticator
