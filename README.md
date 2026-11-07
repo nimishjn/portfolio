@@ -289,6 +289,13 @@ The files live in **Admin → Documents** (Vercel Blob in production, `/document
 signed-in user can list; `/cv.pdf` and `/resume.pdf` are the public way to them. Until the CV has a PDF, the
 site hides its Download buttons and `/cv.pdf` redirects to `/cv`.
 
+**Replacing a file with one of the same name.** Each upload gets its own folder in Blob. When a file has the
+name of one already there, Payload 3.92 treats it as an overwrite and stores it without that folder, while an
+updated entry keeps its old one, so the entry's URL would point at a folder the file isn't in ("Blob not
+found"). `src/hooks/upload-overwrite.ts` keeps the two in step on Media and Documents; the replaced file is
+left behind in the store and can be deleted from Vercel → Storage → Blob. Remove the hook once Payload's
+overwrite check accounts for the folder.
+
 **Resume:** a resume made elsewhere goes under **Site → Resume** and is served at `/resume.pdf`. Nothing on the
 site links to it and search engines are asked not to index it, so it's shared by link. Until one is
 uploaded, `/resume.pdf` redirects to `/cv`.
