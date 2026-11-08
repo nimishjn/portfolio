@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 import { revalidateHooks } from '../hooks/revalidate'
-import { keepOverwriteInFolder } from '../hooks/upload-overwrite'
+import { overwriteHooks } from '../hooks/upload-overwrite'
 import { publicRead } from '../lib/access'
 
 export const Media: CollectionConfig = {
@@ -15,7 +15,7 @@ export const Media: CollectionConfig = {
   // which on the shared Blob store means any file at its root. A query makes the route find
   // the row first (image sizes included) and 404 otherwise.
   access: { read: ({ req }) => (req.user ? true : { filename: { exists: true } }) },
-  hooks: { ...revalidateHooks, beforeOperation: [keepOverwriteInFolder] },
+  hooks: { ...revalidateHooks, ...overwriteHooks },
   fields: [
     {
       name: 'alt',

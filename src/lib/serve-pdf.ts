@@ -43,9 +43,16 @@ async function readPdf(url: string, filename: string): Promise<Buffer | null> {
     const dir = path.resolve('documents')
     const file = path.resolve(dir, filename)
     if (!file.startsWith(dir + path.sep)) return null
-    return readFile(file).catch(() => null)
+    return readFile(file).catch((error: NodeJS.ErrnoException) => {
+      console.error(`serve-pdf: could not read ${file}: ${error.code ?? error.message}`)
+      return null
+    })
   }
   const file = await fetch(url, { cache: 'no-store' })
-  if (!file.ok) return null
+  if (!file.ok) {
+    // The upload's stored location and the file in Blob can disagree; the log says which URL failed.
+    console.error(`serve-pdf: ${file.status} fetching ${url}`)
+    return null
+  }
   return Buffer.from(await file.arrayBuffer())
 }

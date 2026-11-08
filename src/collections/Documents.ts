@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 import { revalidateHooks } from '../hooks/revalidate'
-import { keepOverwriteInFolder } from '../hooks/upload-overwrite'
+import { overwriteHooks } from '../hooks/upload-overwrite'
 
 /** PDF files: the CV and resume that /cv.pdf and /resume.pdf serve (chosen under Site → CV and Site → Resume). */
 export const Documents: CollectionConfig = {
@@ -16,7 +16,7 @@ export const Documents: CollectionConfig = {
   // without being able to list every upload and its storage URL.
   access: { read: ({ req }) => Boolean(req.user) },
   // The site shows its Download CV buttons only while the CV has a PDF, so removing one revalidates.
-  hooks: { ...revalidateHooks, beforeOperation: [keepOverwriteInFolder] },
+  hooks: { ...revalidateHooks, ...overwriteHooks },
   upload: {
     mimeTypes: ['application/pdf'],
   },
